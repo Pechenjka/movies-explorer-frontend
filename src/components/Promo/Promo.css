@@ -13,6 +13,7 @@
 }
 
 .promo__header {
+  font-family: "Inter";
   line-height: 58px;
   font-size: 50px;
   font-weight: normal;
@@ -23,6 +24,7 @@
 }
 
 .promo__description {
+  font-family: "Inter";
   max-width: 310px;
   font-size: 13px;
   line-height: 16px;
@@ -32,6 +34,7 @@
 }
 
 .promo__button {
+  font-family: "Inter";
   width: 129px;
   height: 36px;
   margin: 145px 0 75px 0;
