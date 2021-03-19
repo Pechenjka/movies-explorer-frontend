@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "prettier/react",
+    "prettier/standard",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-console": "off",
+    "no-underscore-dangle": ["error", { "allow": [ "_id" ] }]
+
+}}
+
