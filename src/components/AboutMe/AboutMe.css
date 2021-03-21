@@ -1,0 +1,87 @@
+.aboutMe {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.aboutMe__header {
+  border-bottom: 1px solid rgba(218, 218, 218, 1);
+  max-width: 1140px;
+  padding-bottom: 23px;
+  padding-top: 110px;
+  margin: 0 auto;
+}
+
+.aboutMe__header_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0;
+}
+
+.aboutMe__body {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+  padding-bottom: 50px;
+}
+
+.aboutMe__body_about-author {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.aboutMe__body_title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+}
+
+.aboutMe__body_specialty {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 18px 0 0 0;
+}
+
+.aboutMe__body_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 26px 0 0 0;
+}
+
+.aboutMe__body_list-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  margin: auto 0 0 0;
+}
+
+.aboutMe__body_link-container {
+  margin: 0 20px 0 0;
+}
+
+.aboutMe__body_link {
+  color: white;
+  text-decoration: none;
+}
+
+.aboutMe__body_link:hover {
+  opacity: 0.5;
+  transition: 0.3s linear 0s;
+  text-decoration: none;
+}
+
+.aboutMe__body_author {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
