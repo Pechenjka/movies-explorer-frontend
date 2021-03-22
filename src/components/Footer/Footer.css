@@ -1,0 +1,31 @@
+.footer{
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.footer__title-container{
+padding: 70px 0 20px 0;
+border-bottom: 1px solid rgba(66, 66, 66, 1);
+;
+}
+
+.footer__title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  margin: 0;
+  color: rgba(139, 139, 139, 1);
+
+}
+
+.footer__links {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__copyright{
+  margin: 0;
+}

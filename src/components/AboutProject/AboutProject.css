@@ -4,20 +4,6 @@
   margin: 0 auto;
 }
 
-.aboutProject__header {
-  border-bottom: 1px solid rgba(218, 218, 218, 1);
-  padding-bottom: 23px;
-  padding-top: 110px;
-  display: block;
-}
-
-.aboutProject__header_text {
-  width: 100%;
-  margin: 0;
-  font-size: 22px;
-  line-height: 27px;
-}
-
 .aboutProject__list {
   padding: 0;
   margin: 70px 0 110px 0;

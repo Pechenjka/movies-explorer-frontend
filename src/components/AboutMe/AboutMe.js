@@ -1,5 +1,7 @@
 import "./AboutMe.css";
 import Author from "../../images/author.jpg";
+import ListLinks from "../ListLinks/ListLinks";
+import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
 const AboutMe = () => {
   const links = [
@@ -9,9 +11,7 @@ const AboutMe = () => {
 
   return (
     <section className="aboutMe">
-      <div className="aboutMe__header">
-        <p className="aboutMe__header_text">Студент</p>
-      </div>
+      <HeaderComponent title='Студент'/>
       <div className="aboutMe__body">
         <div className="aboutMe__body_about-author">
           <h3 className="aboutMe__body_title">Петр</h3>
@@ -24,17 +24,7 @@ const AboutMe = () => {
             есть жена и сын, которые меня очень поддерживают. Увлекаюсь спортом. В данный момент нахожусь в поисках
             работы.
           </p>
-          <ul className="aboutMe__body_list-links">
-            {links.map((item) => {
-              return (
-                <li className="aboutMe__body_link-container">
-                  <a href={item.path} target="blank" rel="noopener" className="aboutMe__body_link" key={item.id}>
-                    {item.name}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <ListLinks links={links}/>
         </div>
         <div>
           <img className="aboutMe__body_author" src={Author} alt="автор" />
