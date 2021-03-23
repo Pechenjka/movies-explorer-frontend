@@ -1,0 +1,46 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__logo {
+  width: 38px;
+}
+
+.navigation__logo:hover {
+  opacity: 0.8;
+  transition: 0.3s linear all;
+}
+.navigation__list-links {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation__link-container {
+  width: 76px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  margin-left: 30px;
+}
+
+.navigation__link {
+  display: block;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: white;
+}
+
+.navigation__link-container:hover {
+  opacity: 0.8;
+  transition: 0.3s linear 0s;
+}

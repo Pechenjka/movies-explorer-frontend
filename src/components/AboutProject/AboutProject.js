@@ -22,7 +22,7 @@ const AboutProject = () => {
   ];
 
   return (
-    <section className="content_aboutProject">
+    <section className="aboutProject" id = 'aboutProject' >
       <HeaderComponent title="О проекте" />
       <ul className="aboutProject__list">
         {aboutProject.map((item) => {

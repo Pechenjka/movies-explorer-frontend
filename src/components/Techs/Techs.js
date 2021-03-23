@@ -4,8 +4,8 @@ import "./Techs.css";
 const Techs = () => {
   const stackTechs = ["HTML", "CSS", "JS", "React", "Git", "Express", "mongoDB"];
   return (
-    <section className="content_techs">
-      <HeaderComponent title='О проекте'/>
+    <section className="techs">
+      <HeaderComponent title='Технологии'/>
       <div className="techs__body">
         <h3 className="techs__body-title">7 технологий</h3>
         <p className="techs__body-text">
