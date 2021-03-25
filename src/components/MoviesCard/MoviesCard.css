@@ -2,8 +2,6 @@
   background-color: rgba(34, 34, 34, 1);
   width: 364px;
   height: 271px;
-
-
 }
 
 .card_descripton-container {
@@ -46,18 +44,27 @@ margin: 14px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('../../images/icon-saved-movie.svg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .card__button-saved-movie:hover {
   background-color: #ccc;
   transition: 0.3s linear all;
 }
-/* .card__button-saved-movie_active {
-  background-color: rgba(61, 220, 132, 1);
-} */
-/* .card__icon-saved-movie:active {
-background-color: #fff;
 
-} */
+.card__button-icon-saved {
+  background-image: url('../../images/icon-deleted-card.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card__button-icon-handleSaved {
+  background-image: url('../../images/icon-saved-movie-active.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(61, 220, 132, 1);
+}
 
 .card__movie {
   width: 364px;

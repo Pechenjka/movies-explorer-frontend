@@ -1,21 +1,22 @@
+import { useState } from "react";
 import "./MoviesCard.css";
-import iconSavedMovie from "../../images/icon-saved-movie.svg";
 
-const MoviesCard = () => {
+const MoviesCard = (props) => {
+  const { isSaved} = props;
+
+  const [addedSavedMovie, setAddedSavedMovie ] = useState(false)
+  
+  const handleSavedMovie = () => {
+    setAddedSavedMovie(!addedSavedMovie)
+  }
+
+  const saved = `card__button-saved-movie ${(isSaved === true ? "card__button-icon-saved" : "") || (addedSavedMovie === true ? 'card__button-icon-handleSaved': '')}`;
   return (
     <li className="card">
       <div className="card_descripton-container">
         <p className="card__title">33 слова о дизайне</p>
         <p className="card__duration">1ч 47м</p>
-        <button className="card__button-saved-movie">
-          <img
-            className="card__icon-saved-movie"
-            src={iconSavedMovie}
-            alt="лого иконки сохранения"
-            type="button"
-            aria-label="Сщхранить карточку"
-          />
-        </button>
+        <button className={saved} onClick={handleSavedMovie}></button>
       </div>
       <iframe
         className="card__movie"

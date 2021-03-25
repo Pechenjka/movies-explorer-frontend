@@ -5,17 +5,11 @@ import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import { useState } from "react";
 import "./App.css";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false)
-
-const trueLoggedIn = () => {
-  setLoggedIn(true)
-}
-// const falseLoggedIn = () => {
-//   setLoggedIn(false)
-// }
 
   return (
     <div className="page">
@@ -25,7 +19,10 @@ const trueLoggedIn = () => {
           <Main />
         </Route>
         <Route exact path="/movies">
-          <Movies setLoggedIn={trueLoggedIn}/>
+          <Movies setLoggedIn={setLoggedIn} />
+        </Route>
+        <Route exact path="/saved-movies">
+          <SavedMovies setLoggedIn={setLoggedIn} />
         </Route>
       </Switch>
       <Footer />
