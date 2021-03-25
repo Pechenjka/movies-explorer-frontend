@@ -5,14 +5,6 @@
   padding: 21px 70px;
 }
 
-.header__link-button {
-  color: black;
-  height: 32px;
-  width: 76px;
-  border-radius: 3px;
-  background-color: rgba(61, 220, 132, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+.header-black {
+  background-color: black
 }

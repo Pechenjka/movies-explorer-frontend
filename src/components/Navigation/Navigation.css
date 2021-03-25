@@ -17,10 +17,12 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 100%;
+    justify-content: flex-end;
 }
 
 .navigation__link-container {
-  width: 76px;
+
   height: 32px;
   display: flex;
   justify-content: center;
@@ -29,18 +31,58 @@
   margin-left: 30px;
 }
 
+.navigation__link-container_auth {
+  margin-left: 16px;
+}
+.navigation__link-container_auth:last-child {
+  margin-left: 746px;
+  width: 100px;
+  display: flex;
+}
+
 .navigation__link {
   display: block;
+  height: 32px;
   text-decoration: none;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
 }
 
 .navigation__link-container:hover {
   opacity: 0.8;
   transition: 0.3s linear 0s;
+}
+
+.header__link-button {
+  color: black;
+  height: 32px;
+  width: 76px;
+  border-radius: 3px;
+  background-color: rgba(61, 220, 132, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.header__link_saved-films {
+  width: 142px;
+}
+
+.header__link-account_logo{
+background-image: url('../../images/icon-account.svg');
+object-fit: contain;
+background-repeat: no-repeat;
+width: 100%;
+background-position-x: 15px;
+background-position-y: 7px;
+border: 2px solid rgba(170, 170, 170, 1);
+border-radius: 50px;
+box-sizing: border-box;
+padding-left: 20px;
 }
