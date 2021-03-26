@@ -53,13 +53,16 @@
   align-items: center;
   color: white;
 }
+.navigation__link-current-address {
+  font-weight: 900;
 
+}
 .navigation__link-container:hover {
   opacity: 0.8;
   transition: 0.3s linear 0s;
 }
 
-.header__link-button {
+.navigation__link-button {
   color: black;
   height: 32px;
   width: 76px;
@@ -70,11 +73,11 @@
   align-items: center;
 
 }
-.header__link_saved-films {
+.navigation__link_saved-films {
   width: 142px;
 }
 
-.header__link-account_logo{
+.navigation__link-account_logo{
 background-image: url('../../images/icon-account.svg');
 object-fit: contain;
 background-repeat: no-repeat;

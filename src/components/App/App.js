@@ -11,10 +11,10 @@ import NotFound from "../NotFound/NotFound";
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
-
   const handleLoggidIn = () => {
     setLoggedIn(true)
   }
+
   return (
     <div className="page">
       <Switch>
