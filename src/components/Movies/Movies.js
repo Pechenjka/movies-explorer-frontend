@@ -1,10 +1,11 @@
 import { Fragment, useEffect } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css";
 
 const Movies = (props) => {
-  const { handleLoggidIn } = props;
+  const { handleLoggidIn, isLoading, handleIsLoading } = props;
 
   const cards = [
     { id: "1" },
@@ -25,10 +26,18 @@ const Movies = (props) => {
     handleLoggidIn();
   }, [handleLoggidIn]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log(handleIsLoading);
+      handleIsLoading();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [handleIsLoading]);
+
   return (
     <Fragment>
       <SearchForm />
-      <MoviesCardList cards={cards} />
+      {isLoading === true ? <Preloader /> : <MoviesCardList cards={cards} />}
       <button className="movies__button">Еще</button>
     </Fragment>
   );

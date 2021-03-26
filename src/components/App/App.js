@@ -10,22 +10,26 @@ import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLoggidIn = () => {
-    setLoggedIn(true)
-  }
+    setLoggedIn(true);
+  };
+  const handleIsLoading = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className="page">
       <Switch>
         <Route exact path="/">
-          <Header  />
-          <Main loggedIn={loggedIn}/>
+          <Header />
+          <Main loggedIn={loggedIn} />
           <Footer />
         </Route>
         <Route exact path="/movies">
           <Header loggedIn={loggedIn} />
-          <Movies handleLoggidIn={handleLoggidIn} />
+          <Movies handleLoggidIn={handleLoggidIn} isLoading={isLoading} handleIsLoading={handleIsLoading}/>
           <Footer />
         </Route>
         <Route exact path="/saved-movies">
