@@ -4,7 +4,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css";
 
 const Movies = (props) => {
-  const { setLoggedIn } = props;
+  const { handleLoggidIn } = props;
 
   const cards = [
     { id: "1" },
@@ -22,8 +22,8 @@ const Movies = (props) => {
   ];
 
   useEffect(() => {
-    setLoggedIn(true);
-  }, [setLoggedIn]);
+    handleLoggidIn();
+  }, [handleLoggidIn]);
 
   return (
     <Fragment>

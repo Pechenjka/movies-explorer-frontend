@@ -6,28 +6,39 @@ import Movies from "../Movies/Movies";
 import { useState } from "react";
 import "./App.css";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import NotFound from "../NotFound/NotFound";
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false)
 
+  const handleLoggidIn = () => {
+    setLoggedIn(true)
+  }
   return (
     <div className="page">
-      <Header loggedIn={loggedIn} />
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Header  />
+          <Main loggedIn={loggedIn}/>
+          <Footer />
         </Route>
         <Route exact path="/movies">
-          <Movies setLoggedIn={setLoggedIn} />
+          <Header loggedIn={loggedIn} />
+          <Movies handleLoggidIn={handleLoggidIn} />
+          <Footer />
         </Route>
         <Route exact path="/saved-movies">
-          <SavedMovies setLoggedIn={setLoggedIn} />
+          <Header loggedIn={loggedIn} />
+          <SavedMovies handleLoggidIn={handleLoggidIn} />
+          <Footer />
+        </Route>
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
-}
+};
 
 export default App;

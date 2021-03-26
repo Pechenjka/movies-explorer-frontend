@@ -5,7 +5,7 @@ import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 import "./Main.css";
 
-const Main = (props) => {
+const Main = () => {
   return (
     <main className="content">
       <Promo />
