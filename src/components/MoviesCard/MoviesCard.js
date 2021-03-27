@@ -1,16 +1,20 @@
 import { useState } from "react";
 import "./MoviesCard.css";
+import Poster from "../../images/poster.png";
 
 const MoviesCard = (props) => {
-  const { isSaved} = props;
+  const { isSaved } = props;
 
-  const [addedSavedMovie, setAddedSavedMovie ] = useState(false)
-  
+  const [addedSavedMovie, setAddedSavedMovie] = useState(false);
+
   const handleSavedMovie = () => {
-    setAddedSavedMovie(!addedSavedMovie)
-  }
+    setAddedSavedMovie(!addedSavedMovie);
+  };
 
-  const saved = `card__button-saved-movie ${(isSaved === true ? "card__button-icon-saved" : "") || (addedSavedMovie === true ? 'card__button-icon-handleSaved': '')}`;
+  const saved = `card__button-saved-movie ${
+    (isSaved === true ? "card__button-icon-saved" : "") ||
+    (addedSavedMovie === true ? "card__button-icon-handleSaved" : "")
+  }`;
   return (
     <li className="card">
       <div className="card_descripton-container">
@@ -18,13 +22,7 @@ const MoviesCard = (props) => {
         <p className="card__duration">1ч 47м</p>
         <button className={saved} onClick={handleSavedMovie}></button>
       </div>
-      <iframe
-        className="card__movie"
-        src="https://www.youtube.com/embed/5MgBikgcWnY"
-        title="Мой фильм"
-        allowFullScreen
-        alt="фильм"
-      ></iframe>
+      <img className="card__movie" alt="Постер" src={Poster} />
     </li>
   );
 };

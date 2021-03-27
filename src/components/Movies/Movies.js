@@ -28,7 +28,6 @@ const Movies = (props) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log(handleIsLoading);
       handleIsLoading();
     }, 3000);
     return () => clearTimeout(timer);
