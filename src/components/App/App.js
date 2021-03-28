@@ -8,6 +8,7 @@ import "./App.css";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,7 +31,7 @@ const App = () => {
         </Route>
         <Route exact path="/movies">
           <Header loggedIn={loggedIn} />
-          <Movies handleLoggidIn={handleLoggidIn} isLoading={isLoading} handleIsLoading={handleIsLoading}/>
+          <Movies handleLoggidIn={handleLoggidIn} isLoading={isLoading} handleIsLoading={handleIsLoading} />
           <Footer />
         </Route>
         <Route exact path="/saved-movies">
@@ -38,8 +39,11 @@ const App = () => {
           <SavedMovies handleLoggidIn={handleLoggidIn} />
           <Footer />
         </Route>
-        <Route path='/signup'>
-        <Register />
+        <Route path="/signup">
+          <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
         </Route>
         <Route path="*">
           <NotFound />

@@ -8,6 +8,7 @@ const Register = () => {
       buttonName="Зарегистрироваться"
       text="Уже зарегистрированы?"
       textLink="Войти"
+      linkPath='/signin'
     ></AuthForm>
   );
 };
