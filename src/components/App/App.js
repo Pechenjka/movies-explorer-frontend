@@ -7,6 +7,7 @@ import { useState } from "react";
 import "./App.css";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
+import Register from "../Register/Register";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,6 +37,9 @@ const App = () => {
           <Header loggedIn={loggedIn} />
           <SavedMovies handleLoggidIn={handleLoggidIn} />
           <Footer />
+        </Route>
+        <Route path='/signup'>
+        <Register />
         </Route>
         <Route path="*">
           <NotFound />
