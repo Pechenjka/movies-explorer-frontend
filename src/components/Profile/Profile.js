@@ -6,7 +6,7 @@ const Profile = (props) => {
   const { handleLoggidIn } = props;
   const currentUserName = "Виталий";
   const currentUserEmail = "pochta@yandex.ru";
-  
+
   useEffect(() => {
     handleLoggidIn();
   }, [handleLoggidIn]);

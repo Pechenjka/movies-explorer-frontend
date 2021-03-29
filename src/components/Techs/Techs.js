@@ -5,20 +5,22 @@ const Techs = () => {
   const stackTechs = ["HTML", "CSS", "JS", "React", "Git", "Express", "mongoDB"];
   return (
     <section className="techs">
-      <HeaderComponent title='Технологии'/>
-      <div className="techs__body">
-        <h3 className="techs__body-title">7 технологий</h3>
-        <p className="techs__body-text">
-          На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
-        </p>
+      <div className='techs__container'>
+        <HeaderComponent title="Технологии" />
+        <div className="techs__body">
+          <h3 className="techs__body-title">7 технологий</h3>
+          <p className="techs__body-text">
+            На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
+          </p>
+        </div>
+        <ul className="techs__stack">
+          {stackTechs.map((item) => (
+            <li className="techs__stack_container" key={item.toString()}>
+              <p className="techs__stack_item">{item}</p>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="techs__stack">
-        {stackTechs.map((item) => (
-          <li className="techs__stack_container" key={item.toString()}>
-            <p className='techs__stack_item'>{item}</p>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 };

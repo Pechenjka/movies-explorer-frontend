@@ -4,6 +4,12 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 1277px) {
+  .aboutProject {
+    margin: 0 50px;
+  }
+}
+
 .aboutProject__list {
   padding: 0;
   margin: 70px 0 110px 0;
@@ -20,7 +26,7 @@
   margin-left: 40px;
 }
 
-.aboutProject__list_header {
+.aboutProject__list_title {
   font-size: 20px;
   line-height: 24px;
   font-style: normal;
@@ -28,12 +34,19 @@
   margin: 0 0 26px 0;
 }
 
-.aboutProject__list_paragraph {
+.aboutProject__list_description {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   margin: 0;
+}
+
+@media screen and (max-width: 1277px) {
+  .aboutProject__list_description {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
 
 .aboutProject__table {
@@ -47,7 +60,18 @@
   width: 228px;
   background-color: rgba(61, 220, 132, 1);
   color: black;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
 }
+
+@media screen and (max-width: 1277px) {
+  .aboutProject__table_container {
+    width: 140px;
+  }
+}
+
 .aboutProject__table_container:last-of-type {
   background-color: rgba(48, 48, 48, 1);
   color: white;

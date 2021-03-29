@@ -28,8 +28,8 @@ const AboutProject = () => {
         {aboutProject.map((item) => {
           return (
             <li className="aboutProject__list_container" key={item.id}>
-              <h3 className="aboutProject__list_header">{item.header}</h3>
-              <p className="aboutProject__list_paragraph">{item.paragraph}</p>
+              <h3 className="aboutProject__list_title">{item.header}</h3>
+              <p className="aboutProject__list_description">{item.paragraph}</p>
             </li>
           );
         })}

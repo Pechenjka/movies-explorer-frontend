@@ -5,7 +5,7 @@ const Portfolio = () => {
   const linksPortfolio = [
     { name: "Статичный сайт", link: "https://github.com/PetyaLobachev/how-to-learn", id: "1" },
     { name: "Адаптивный сайт", link: "https://github.com/PetyaLobachev/russian-travel", id: "2" },
-    { name: "Одностраничное приложение на Frontend (React) + Backend (Node)", link: "https://lobachev.students.nomoreparties.space/", id: "3" },
+    { name: "Одностраничное приложение", link: "https://lobachev.students.nomoreparties.space/", id: "3" },
 
   ];
 
