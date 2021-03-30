@@ -15,6 +15,7 @@ const SavedMovies = (props) => {
   useEffect(() => {
     setIsSaved(true);
   }, [setIsSaved]);
+
   return (
     <section className="savedMovies">
       <SearchForm />

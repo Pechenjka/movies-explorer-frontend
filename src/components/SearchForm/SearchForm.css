@@ -1,14 +1,13 @@
 .searchForm {
-  width: 1140px;
+  width: 100%;
   padding: 60px 0 70px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(66, 66, 66, 1);
-  ;
 }
 
 .searchForm__form {
-  width: 1140px;
-  margin: 0 auto ;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .searchForm__form-fieldset {

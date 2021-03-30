@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import SearchForm from "../SearchForm/SearchForm";
@@ -34,11 +34,11 @@ const Movies = (props) => {
   }, [handleIsLoading]);
 
   return (
-    <Fragment>
+    <div className="movies">
       <SearchForm />
       {isLoading === true ? <Preloader /> : <MoviesCardList cards={cards} />}
       <button className="movies__button">Еще</button>
-    </Fragment>
+    </div>
   );
 };
 

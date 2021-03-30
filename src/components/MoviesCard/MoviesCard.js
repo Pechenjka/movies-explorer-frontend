@@ -15,6 +15,7 @@ const MoviesCard = (props) => {
     (isSaved === true ? "card__button-icon-saved" : "") ||
     (addedSavedMovie === true ? "card__button-icon-handleSaved" : "")
   }`;
+
   return (
     <li className="card">
       <div className="card_descripton-container">

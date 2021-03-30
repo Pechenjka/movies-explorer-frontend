@@ -2,9 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import HeaderLogo from "../../images/logo-header.svg";
 import AccountLogo from "../../images/icon-account.svg";
+import burgerMenuIcon from "../../images/burger-menu-icon.svg";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import { useState } from "react";
 
 const Navigation = (props) => {
   const { loggedIn } = props;
+
+  const [isBurgerMenu, setIsBurgerMenu] = useState(false);
 
   const itemsNavigation = [
     { name: "Регистрация", path: "/signup", id: "1" },
@@ -20,13 +25,15 @@ const Navigation = (props) => {
     loggedIn === true ? "navigation__link-container_auth" : ""
   } `;
 
+  const listlinksUnACtive = loggedIn === true ? "navigation__list-links_unActive" : "";
+
   return (
     <nav className="navigation">
       <Link to="/">
         <img className="navigation__logo" src={HeaderLogo} alt="лого" />
       </Link>
 
-      <ul className="navigation__list-links">
+      <ul className={`navigation__list-links ${listlinksUnACtive}`}>
         {(loggedIn === true ? AuthNavigation : itemsNavigation).map((item) => {
           return (
             <li className={classesLinkContainer} key={item.id}>
@@ -42,6 +49,12 @@ const Navigation = (props) => {
           );
         })}
       </ul>
+      {loggedIn === true && (
+        <div className="navigation__burger " onClick={() => isBurgerMenu === false && setIsBurgerMenu(true)}>
+          <img className="navigation__burger-icon" src={burgerMenuIcon} alt="Иконка бургер-меню" />
+          <BurgerMenu isBurgerMenu={isBurgerMenu} setIsBurgerMenu={setIsBurgerMenu} />
+        </div>
+      )}
     </nav>
   );
 };
