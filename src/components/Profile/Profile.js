@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
@@ -6,6 +6,10 @@ const Profile = (props) => {
   const { handleLoggidIn } = props;
   const currentUserName = "Виталий";
   const currentUserEmail = "pochta@yandex.ru";
+
+  const [isEditProfile, setIsEditProfile] = useState(false);
+
+  const isDisabledInput = isEditProfile === false && "disabled";
 
   useEffect(() => {
     handleLoggidIn();
@@ -23,6 +27,7 @@ const Profile = (props) => {
             type="text"
             name="text"
             id="text"
+            disabled={isDisabledInput}
             required
           />
           <span id="text-error"></span>
@@ -33,14 +38,30 @@ const Profile = (props) => {
             type="email"
             name="email"
             id="email"
+            disabled={isDisabledInput}
             required
           />
           <span id="email-error"></span>
         </fieldset>
-        <button className="profile__form_button">Редактировать</button>
-        <Link to="/" className="profile__form_link">
-          Выйти из аккаунта
-        </Link>
+        {isEditProfile === true ? (
+          <Fragment>
+            <span className="profile__saved-button-span" id="text-error">
+              При обновлении профиля произошла ошибка.
+            </span>
+            <button className="profile__saved-button" type="submit">
+              Сохранить
+            </button>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <button className="profile__form_button" onClick={() => setIsEditProfile(true)}>
+              Редактировать
+            </button>
+            <Link to="/" className="profile__form_link">
+              Выйти из аккаунта
+            </Link>
+          </Fragment>
+        )}
       </form>
     </div>
   );

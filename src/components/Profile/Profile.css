@@ -93,3 +93,35 @@
   opacity: 0.8;
   transition: 0.3s linear all;
 }
+
+.profile__saved-button {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  height: 45px;
+  width: 410px;
+  padding: 0;
+  margin: 20px 0 0;
+  text-align: center;
+  background-color: rgba(52, 86, 243, 1);
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgba(52, 86, 243, 1);
+  color: white;
+  cursor: pointer;
+}
+.profile__saved-button:hover {
+  opacity: 0.8;
+  transition: 0.3s linear all;
+}
+
+.profile__saved-button-span {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(255, 0, 76, 1);
+  margin: 190px 0 0;
+}

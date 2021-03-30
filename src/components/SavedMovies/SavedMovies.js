@@ -4,9 +4,10 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
 const SavedMovies = (props) => {
-  const { handleLoggidIn, setButtonAddViewFilms } = props;
-  const savedCards = [{ id: "1" }, { id: "2" }, { id: "3" }];
+  const { handleLoggidIn} = props;
   const [isSaved, setIsSaved] = useState(false);
+
+  const savedCards = [{ id: "1" }, { id: "2" }, { id: "3" }];
 
   useEffect(() => {
     handleLoggidIn();
@@ -19,7 +20,7 @@ const SavedMovies = (props) => {
   return (
     <section className="savedMovies">
       <SearchForm />
-      <MoviesCardList cards={savedCards} setButtonAddViewFilms={setButtonAddViewFilms} isSaved={isSaved} />
+      <MoviesCardList cards={savedCards} isSaved={isSaved} />
     </section>
   );
 };
