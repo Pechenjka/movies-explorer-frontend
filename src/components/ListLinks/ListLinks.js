@@ -1,12 +1,15 @@
+
 import './ListLinks.css'
 
-const ListLinks = ({links}) => {
+const ListLinks = ({links, classListFooter}) => {
+
+
   return(
-    <ul className="links__list">
+    <ul className={`links__list ${classListFooter}`} >
     {links.map((item) => {
       return (
-        <li className="links__list-container" key={item.id}>
-          <a href={item.path} target="blank" rel="noopener" className="links__link" key={item.id}>
+        <li className={`links__list-container ${item.classesListContainer}`}  key={item.id}>
+          <a href={item.path} target="blank" rel="noopener" className={`links__link ${item.classeslink}`} key={item.id}>
             {item.name}
           </a>
         </li>

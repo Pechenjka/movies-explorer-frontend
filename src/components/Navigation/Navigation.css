@@ -112,3 +112,17 @@
     transition: 0.3s linear all;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .navigation__link-container {
+    margin-left: 14px;
+  }
+  .navigation__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .navigation__link-button {
+    height: 26px;
+    width: 54px;
+  }
+}

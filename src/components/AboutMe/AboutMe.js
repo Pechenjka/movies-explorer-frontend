@@ -1,17 +1,16 @@
 import "./AboutMe.css";
-import Author from "../../images/author.jpg";
 import ListLinks from "../ListLinks/ListLinks";
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
 const AboutMe = () => {
   const links = [
-    { id:'1', name: "Github", path: "https://github.com/PetyaLobachev"},
-    { id:'2', name: "Vk", path: "https://vk.com/pe4enjkka"},
+    { id: "1", name: "Github", path: "https://github.com/PetyaLobachev" },
+    { id: "2", name: "Vk", path: "https://vk.com/pe4enjkka" },
   ];
 
   return (
     <section className="aboutMe">
-      <HeaderComponent title='Студент'/>
+      <HeaderComponent title="Студент" />
       <div className="aboutMe__body">
         <div className="aboutMe__body_about-author">
           <h3 className="aboutMe__body_title">Петр</h3>
@@ -24,11 +23,9 @@ const AboutMe = () => {
             есть жена и сын, которые меня очень поддерживают. Увлекаюсь спортом. В данный момент нахожусь в поисках
             работы.
           </p>
-          <ListLinks links={links}/>
+          <ListLinks links={links} />
         </div>
-        <div>
-          <img className="aboutMe__body_author" src={Author} alt="автор" />
-        </div>
+        <div className="aboutMe__body_author"></div>
       </div>
     </section>
   );

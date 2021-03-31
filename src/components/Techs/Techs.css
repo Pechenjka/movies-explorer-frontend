@@ -1,12 +1,11 @@
 .techs {
   color: #ffff;
-  max-width: 1140px;
+  max-width: 100%;
   margin: 0 auto;
   background: rgba(39, 39, 39, 1);
 }
 
 .techs__container {
-  max-width: 1140px;
   margin: 0 50px;
 }
 
@@ -85,4 +84,41 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
+}
+
+@media screen and (max-width: 767px) {
+  .techs__container {
+    max-width: 1140px;
+    margin: 0 18px;
+  }
+
+  .techs__body-title {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 60px 0 24px;
+  }
+  .techs__body-text {
+    font-size: 11px;
+    line-height: 16px;
+    width: 100%;
+  }
+
+  .techs__stack {
+    width: 178px;
+    margin: 83px auto 0;
+    padding-bottom: 90px;
+    flex-wrap: wrap;
+  }
+
+  .techs__stack_container {
+    margin-top: 10px;
+  }
+
+  .techs__stack_container:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  .techs__stack_container:nth-child(7) {
+    margin-right: auto;
+  }
 }

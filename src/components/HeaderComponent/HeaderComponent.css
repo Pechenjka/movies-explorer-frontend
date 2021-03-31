@@ -19,3 +19,11 @@
   font-size: 22px;
   line-height: 27px;
 }
+
+@media screen and (max-width: 767px) {
+  .headerComponent {
+    padding-bottom: 28px;
+    padding-top: 70px;
+  }
+
+}

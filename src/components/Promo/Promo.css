@@ -90,7 +90,6 @@
 
 @media screen and (max-width: 1277px) {
   .promo__button {
-    /* margin-top: 92px; */
     margin: 92px auto 76px;
     display: block;
   }
@@ -106,5 +105,28 @@
     width: 310px;
     height: 304px;
     margin: 0 0 48px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .promo {
+    padding-top: 70px;
+  }
+
+  .promo__logo {
+    width: 210px;
+    height: 206px;
+    margin: 0 0 44px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 24px;
+    width: 300px;
+  }
+
+  .promo__button {
+    margin: 80px auto 30px;
   }
 }

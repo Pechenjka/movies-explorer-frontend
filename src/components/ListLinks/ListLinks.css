@@ -27,3 +27,15 @@
   transition: 0.3s linear 0s;
   text-decoration: none;
 }
+
+@media screen and (max-width: 767px) {
+  .links__list {
+    margin-top: 40px;
+  }
+
+  .links__link {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

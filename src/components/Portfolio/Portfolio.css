@@ -34,7 +34,6 @@
 @media screen and (max-width: 1277px) {
   .portfolio__link-container {
     border-bottom: 1px solid rgba(229, 229, 229, 1);
-    ;
   }
 }
 
@@ -68,4 +67,34 @@
 
 .portfolio__link-icon {
   order: 2;
+}
+
+@media screen and (max-width: 767px) {
+  .portfolio {
+    margin: 20px 14px 0;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__list-link {
+    margin: 40px 0 0;
+  }
+
+  .portfolio__link-container {
+    height: 48px;
+  }
+  .portfolio__link-container:last-of-type {
+    height: max-content;
+  }
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__link-icon {
+    width: 12px;
+  }
 }
