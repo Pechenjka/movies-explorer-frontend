@@ -40,10 +40,10 @@ const App = () => {
           <SavedMovies handleLoggidIn={handleLoggidIn} />
           <Footer />
         </Route>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <Register />
         </Route>
-        <Route path="/signin">
+        <Route exact path="/signin">
           <Login />
         </Route>
         <Route exact path="/profile">

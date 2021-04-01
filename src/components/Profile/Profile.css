@@ -125,3 +125,32 @@
   color: rgba(255, 0, 76, 1);
   margin: 190px 0 0;
 }
+
+@media screen and (max-width:767px) {
+  .profile {
+    margin: 74px 30px 40px;
+  }
+
+  .profile__form {
+    width: 100%;
+  }
+
+  .profile__form_fieldset {
+    width: 260px;
+  }
+
+  .profile__form_input {
+    width: 220px;
+  }
+
+  .profile__form_button {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 380px 0 0;
+  }
+  
+  .profile__form_link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

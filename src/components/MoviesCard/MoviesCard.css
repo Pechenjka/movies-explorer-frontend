@@ -46,6 +46,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
 .card__button-saved-movie:hover {
   background-color: #ccc;
   transition: 0.3s linear all;
@@ -74,8 +75,8 @@
 @media screen and (max-width: 1277px) {
   .card {
     height: 258px;
-
   }
+
   .card__movie {
     width: 339px;
     height: 190px;

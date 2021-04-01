@@ -1,7 +1,7 @@
 import './NotFound.css'
 import { Link } from "react-router-dom";
 
-const NotFound = (props) => {
+const NotFound = () => {
 
   return (
     <section className='notFound'>

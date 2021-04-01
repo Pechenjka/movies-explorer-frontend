@@ -8,7 +8,7 @@ const AuthForm = (props) => {
   const { pathname } = useLocation();
 
   return (
-    <div className="container">
+    <div className="authForm">
       <Link to="/">
         <img className="form__logo" src={Logo} alt="Лого формы" />
       </Link>

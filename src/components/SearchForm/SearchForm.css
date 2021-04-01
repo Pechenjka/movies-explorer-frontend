@@ -38,17 +38,16 @@
   border-radius: 48px;
   cursor: pointer;
 }
+
 @media screen and (max-width: 767px) {
   .searchForm {
-    padding-bottom:  50px;
-    /* padding-left: 14px;
-    padding-right: 14px; */
-
+    padding-bottom: 50px;
   }
 
   .searchForm__form-fieldset {
     padding: 0;
   }
+
   .searchForm__form-input {
     padding-left: 10px;
     font-size: 11px;
