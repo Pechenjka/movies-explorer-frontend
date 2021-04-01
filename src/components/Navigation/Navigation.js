@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import HeaderLogo from "../../images/logo-header.svg";
-import AccountLogo from "../../images/icon-account.svg";
 import burgerMenuIcon from "../../images/burger-menu-icon.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { useState } from "react";
@@ -18,7 +17,7 @@ const Navigation = (props) => {
   const AuthNavigation = [
     { name: "Фильмы", path: "/movies", id: "1" },
     { name: "Сохраненные фильмы", path: "/saved-movies", id: "2" },
-    { name: "Аккаунт", path: "/profile", className: "navigation__link-account_logo", id: "3", AccountLogo },
+    { name: "Аккаунт", path: "/profile", className: "navigation__link-account_logo", id: "3"},
   ];
 
   const classesLinkContainer = `navigation__link-container ${
@@ -41,7 +40,6 @@ const Navigation = (props) => {
                 className={`navigation__link ${item.className}`}
                 activeClassName="navigation__link-current-address"
                 to={item.path}
-                src={item.AccountLogo}
               >
                 {item.name}
               </NavLink>
