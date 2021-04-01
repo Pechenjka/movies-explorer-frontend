@@ -30,3 +30,15 @@
   opacity: 0.8;
   transition: 0.3s linear all;
 }
+
+@media screen and (max-width: 767px) {
+  .movies {
+    padding: 0 10px;
+  }
+  .movies__button {
+    width: 240px;
+    height: 36px;
+    margin-bottom: 9px;
+
+  }
+}
