@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
 import "./BurgerMenu.css";
-import AccountLogo from "../../images/icon-account.svg";
 
 const BurgerMenu = ({ isBurgerMenu, setIsBurgerMenu }) => {
   const BurgerMenuLinks = [
     { name: "Главная", path: "/", id: "1" },
     { name: "Фильмы", path: "/movies", id: "2" },
     { name: "Сохраненные фильмы", path: "/saved-movies", id: "3" },
-    { name: "Аккаунт", path: "/profile", className: "burgerMenu__link-account_logo", id: "4", AccountLogo },
+    { name: "Аккаунт", path: "/profile", className: "burgerMenu__link-account_logo", id: "4" },
   ];
 
   const burgerMenu = `burgerMenu ${isBurgerMenu === true ? "burgerMenu__active" : ""}`;
@@ -28,7 +27,6 @@ const BurgerMenu = ({ isBurgerMenu, setIsBurgerMenu }) => {
                 activeClassName="burgerMenu__link-current-address"
                 exact
                 to={item.path}
-                src={item.AccountLogo}
               >
                 {item.name}
               </NavLink>
