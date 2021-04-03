@@ -6,6 +6,8 @@
 
 Сайт: https://movies.lobachev.students.nomoredomains.monster/
 
+Макет проекта: https://www.figma.com/file/kc6ExrMXSfqNHWaHsTqpS8/Diploma?node-id=932%3A4182&viewport=-18265%2C47%2C1.0743353366851807
+
 ### _Стек технологий_
 
 - JavaScript ES6
