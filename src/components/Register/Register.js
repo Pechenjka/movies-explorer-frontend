@@ -1,14 +1,30 @@
 import AuthForm from "../AuthForm/AuthForm";
+import useFormWithValidation from "../../hooks/useForm";
+import { useHistory } from "react-router-dom";
 
+const Register = ({ onRegister }) => {
+  const { values, handleChange } = useFormWithValidation();
 
-const Register = () => {
+const history = useHistory()
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onRegister(values)
+    // history.push('/signin')
+    // .then(() => {
+    //   history.push('/signin')
+    //   })
+  }
   return (
     <AuthForm
       title="Добро пожаловать!"
       buttonName="Зарегистрироваться"
       text="Уже зарегистрированы?"
       textLink="Войти"
-      linkPath='/signin'
+      linkPath="/signin"
+      values={values}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
     ></AuthForm>
   );
 };
