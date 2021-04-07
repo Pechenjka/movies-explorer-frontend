@@ -1,45 +1,59 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import useFormWithValidation from "../../hooks/useForm";
 import "./Profile.css";
 
-const Profile = (props) => {
-  const { handleLoggidIn } = props;
-  const currentUserName = "Виталий";
-  const currentUserEmail = "pochta@yandex.ru";
-
+const Profile = ({ handleLoggidIn, onSignOut, onUpdateUser }) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
+  const { values, handleChange, resetForm } = useFormWithValidation();
 
   const isDisabledInput = isEditProfile === false && "disabled";
+
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     handleLoggidIn();
   }, [handleLoggidIn]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onUpdateUser(values);
+  };
+
+  useEffect(() => {
+    currentUser && resetForm(currentUser);
+  }, [currentUser, resetForm]);
+
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, {currentUserName}!</h2>
-      <form className="profile__form">
+      <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <fieldset className="profile__form_fieldset">
           <label className="profile__form_label">Имя</label>
           <input
             className="profile__form_input"
-            defaultValue={currentUserName}
             type="text"
-            name="text"
-            id="text"
+            name="name"
+            id="name"
             disabled={isDisabledInput}
             required
+            value={values.name || ""}
+            // defaultValue={currentUser.name}
+            onChange={handleChange}
           />
           <span id="text-error"></span>
           <label className="profile__form_label">E-mail</label>
           <input
             className="profile__form_input"
-            defaultValue={currentUserEmail}
+            // defaultValue={currentUser.email}
             type="email"
             name="email"
             id="email"
             disabled={isDisabledInput}
             required
+            value={values.email || ""}
+            onChange={handleChange}
           />
           <span id="email-error"></span>
         </fieldset>
@@ -57,7 +71,7 @@ const Profile = (props) => {
             <button className="profile__form_button" onClick={() => setIsEditProfile(true)}>
               Редактировать
             </button>
-            <Link to="/" className="profile__form_link">
+            <Link to="/" className="profile__form_link" onClick={onSignOut}>
               Выйти из аккаунта
             </Link>
           </Fragment>

@@ -57,6 +57,7 @@ const App = () => {
         }
         if (res.token) {
           localStorage.setItem("jwt", res.token);
+          handleGetUserInfo();
         }
       })
       .catch((err) => {
@@ -69,8 +70,30 @@ const App = () => {
   const tokenCheck = () => {
     mainApi.getContent().then((res) => {
       if (res) {
+        handleGetUserInfo();
         history.push("/movies");
       }
+    });
+  };
+
+  const handleGetUserInfo = () => {
+    mainApi
+      .getUserInfo()
+      .then((res) => setCurrentUser(res))
+      .catch(() => console.log("Пользователь не найден"));
+  };
+
+  const handleSignOut = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      localStorage.removeItem("jwt");
+    }
+  };
+
+  const handleUpdateUser = (values) => {
+    const { email, name } = values;
+    mainApi.setUserInfo(email, name).then((res) => {
+      setCurrentUser(res);
     });
   };
 
@@ -108,7 +131,7 @@ const App = () => {
           </Route>
           <Route exact path="/profile">
             <Header loggedIn={loggedIn} />
-            <Profile handleLoggidIn={handleLoggidIn} />
+            <Profile handleLoggidIn={handleLoggidIn} onSignOut={handleSignOut} onUpdateUser={handleUpdateUser} />
           </Route>
           <Route path="*">
             <NotFound />
