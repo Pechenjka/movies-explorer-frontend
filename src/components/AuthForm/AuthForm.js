@@ -26,8 +26,8 @@ const AuthForm = (props) => {
                 minLength="2"
                 maxLength="30"
                 required
-                value={values.name || ""}
                 onChange={onChange}
+                value={values.name || ""}
               />
               <span className="form__span" id="text-error"></span>
             </Fragment>
@@ -39,8 +39,8 @@ const AuthForm = (props) => {
             name="email"
             id="email"
             required
-            value={values.email || ""}
             onChange={onChange}
+            value={values.email || ''}
           />
           <span className="form__span" id="email-error"></span>
           <label className="form__label">Пароль</label>

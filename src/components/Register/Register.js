@@ -5,16 +5,13 @@ import { useHistory } from "react-router-dom";
 const Register = ({ onRegister }) => {
   const { values, handleChange } = useFormWithValidation();
 
-const history = useHistory()
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onRegister(values)
-    // history.push('/signin')
-    // .then(() => {
-    //   history.push('/signin')
-    //   })
-  }
+    onRegister(values);
+    history.push("/movies");
+  };
   return (
     <AuthForm
       title="Добро пожаловать!"

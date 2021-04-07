@@ -1,5 +1,5 @@
-import { Route, Switch } from "react-router";
-import { useState } from "react";
+import { Route, Switch, useHistory } from "react-router";
+import { useEffect, useState } from "react";
 import "./App.css";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import Footer from "../Footer/Footer";
@@ -18,6 +18,16 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      tokenCheck();
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const handleRegister = (values) => {
     const { name, email, password } = values;
     mainApi
@@ -26,11 +36,43 @@ const App = () => {
         if (!res || res.statusCode === 400) {
           throw new Error({ message: "Не передано одно из полей" });
         }
-        return res;
+        if (res) {
+          handleLogin(values);
+        }
       })
-      .catch(() => console.log({ message: 'Некорректно заполнено одно из полей' }))
+      .catch((err) => {
+        if (err) {
+          console.log({ message: "Некорректно заполнено одно из полей" });
+        }
+      });
   };
 
+  const handleLogin = (values) => {
+    const { email, password } = values;
+    mainApi
+      .authorization(email, password)
+      .then((res) => {
+        if (!res) {
+          throw new Error({ message: "Не передано одно из полей" });
+        }
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log({ message: "Необходимо пройти авторизацию" });
+        }
+      });
+  };
+
+  const tokenCheck = () => {
+    mainApi.getContent().then((res) => {
+      if (res) {
+        history.push("/movies");
+      }
+    });
+  };
 
   const handleLoggidIn = () => {
     setLoggedIn(true);
@@ -62,7 +104,7 @@ const App = () => {
             <Register onRegister={handleRegister} />
           </Route>
           <Route exact path="/signin">
-            <Login />
+            <Login onLogin={handleLogin} />
           </Route>
           <Route exact path="/profile">
             <Header loggedIn={loggedIn} />

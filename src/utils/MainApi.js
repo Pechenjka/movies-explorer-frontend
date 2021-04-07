@@ -1,4 +1,4 @@
-const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
 
 class MainApi {
   constructor(options) {
@@ -7,7 +7,6 @@ class MainApi {
   }
 
   register(name, email, password) {
-    // console.log(name, email, password);
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
@@ -26,6 +25,15 @@ class MainApi {
       method: "POST",
       headers: { ...this._headers },
       body: JSON.stringify({ email, password }),
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
+  getContent() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
     })
       .then(checkResponse)
       .then((res) => res);
