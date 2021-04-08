@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css";
 
 const Movies = (props) => {
-  const { handleLoggidIn, isLoading, handleIsLoading } = props;
+  const { isLoading, handleIsLoading, loggedIn } = props;
 
   const cards = [
     { id: "1" },
@@ -22,9 +24,9 @@ const Movies = (props) => {
     { id: "12" },
   ];
 
-  useEffect(() => {
-    handleLoggidIn();
-  }, [handleLoggidIn]);
+  // useEffect(() => {
+  //   handleLoggidIn();
+  // }, [handleLoggidIn]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,11 +36,15 @@ const Movies = (props) => {
   }, [handleIsLoading]);
 
   return (
-    <div className="movies">
-      <SearchForm />
-      {isLoading === true ? <Preloader /> : <MoviesCardList cards={cards} />}
-      <button className="movies__button">Еще</button>
-    </div>
+    <Fragment>
+      <Header loggedIn={loggedIn} />
+      <div className="movies">
+        <SearchForm />
+        {isLoading === true ? <Preloader /> : <MoviesCardList cards={cards} />}
+        <button className="movies__button">Еще</button>
+      </div>
+      <Footer />
+    </Fragment>
   );
 };
 

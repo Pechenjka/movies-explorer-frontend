@@ -1,5 +1,3 @@
-import CurrentUserContext from "../context/CurrentUserContext";
-
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
 
 class MainApi {

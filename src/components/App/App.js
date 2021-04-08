@@ -12,6 +12,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import mainApi from "../../utils/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -58,11 +59,12 @@ const App = () => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           handleGetUserInfo();
+          setLoggedIn(true);
         }
       })
       .catch((err) => {
         if (err) {
-          console.log({ message: "Необходимо пройти авторизацию" });
+          console.log({ message: "Необходимо пройти регистрацию" });
         }
       });
   };
@@ -71,6 +73,7 @@ const App = () => {
     mainApi.getContent().then((res) => {
       if (res) {
         handleGetUserInfo();
+        setLoggedIn(true);
         history.push("/movies");
       }
     });
@@ -113,25 +116,34 @@ const App = () => {
             <Main loggedIn={loggedIn} />
             <Footer />
           </Route>
-          <Route exact path="/movies">
-            <Header loggedIn={loggedIn} />
-            <Movies handleLoggidIn={handleLoggidIn} isLoading={isLoading} handleIsLoading={handleIsLoading} />
-            <Footer />
-          </Route>
-          <Route exact path="/saved-movies">
-            <Header loggedIn={loggedIn} />
-            <SavedMovies handleLoggidIn={handleLoggidIn} />
-            <Footer />
-          </Route>
+          <ProtectedRoute
+            exact
+            path="/movies"
+            component={Movies}
+            loggedIn={loggedIn}
+            handleIsLoading={handleIsLoading}
+            isLoading={isLoading}
+          />
+          <ProtectedRoute
+            exact
+            path="/saved-movies"
+            component={SavedMovies}
+            loggedIn={loggedIn}
+            handleIsLoading={handleIsLoading}
+          />
+          <ProtectedRoute
+            exact
+            path="/profile"
+            component={Profile}
+            loggedIn={loggedIn}
+            onSignOut={handleSignOut}
+            onUpdateUser={handleUpdateUser}
+          />
           <Route exact path="/signup">
             <Register onRegister={handleRegister} />
           </Route>
           <Route exact path="/signin">
             <Login onLogin={handleLogin} />
-          </Route>
-          <Route exact path="/profile">
-            <Header loggedIn={loggedIn} />
-            <Profile handleLoggidIn={handleLoggidIn} onSignOut={handleSignOut} onUpdateUser={handleUpdateUser} />
           </Route>
           <Route path="*">
             <NotFound />
