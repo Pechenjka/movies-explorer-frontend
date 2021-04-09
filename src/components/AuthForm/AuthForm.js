@@ -4,7 +4,7 @@ import Logo from "../../images/logo-header.svg";
 import { Fragment } from "react";
 
 const AuthForm = (props) => {
-  const { title, buttonName, textLink, text, linkPath, values, onSubmit, onChange } = props;
+  const { title, buttonName, textLink, text, linkPath, values, onSubmit, onChange, errors, isValid, errorSubmit, setErrorSubmit, textError } = props;
   const { pathname } = useLocation();
 
   return (
@@ -29,7 +29,9 @@ const AuthForm = (props) => {
                 onChange={onChange}
                 value={values.name || ""}
               />
-              <span className="form__span" id="text-error"></span>
+              <span className="form__span" id="text-error">
+                {errors.name}
+              </span>
             </Fragment>
           )}
           <label className="form__label">E-mail</label>
@@ -40,9 +42,11 @@ const AuthForm = (props) => {
             id="email"
             required
             onChange={onChange}
-            value={values.email || ''}
+            value={values.email || ""}
           />
-          <span className="form__span" id="email-error"></span>
+          <span className="form__span" id="email-error">
+            {errors.email}
+          </span>
           <label className="form__label">Пароль</label>
           <input
             className="form__input"
@@ -55,15 +59,18 @@ const AuthForm = (props) => {
             onChange={onChange}
           />
           <span className="form__span" id="password-error">
-            Что-то пошло не так...
+            {errors.password}
           </span>
         </fieldset>
-        <button className="form__button" type="submit">
+        <span className={`form__span form__span-error-button ${ errorSubmit === true ? "form__span-error-button_active": ''} `} id="text-error">
+          {textError}
+        </span>
+        <button className={`form__button ${!isValid ? "form__button_disabled" : ""}`} type="submit" disabled={!isValid}>
           {buttonName}
         </button>
         <p className="form__link-text">
           {text}
-          <Link className="form__link" to={linkPath}>
+          <Link className="form__link" to={linkPath} onClick={()=> setErrorSubmit(false)}>
             {textLink}
           </Link>
         </p>

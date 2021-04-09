@@ -1,17 +1,18 @@
-import { useHistory } from "react-router";
+import { useEffect } from "react";
 import useFormWithValidation from "../../hooks/useForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-const Login = ({ onLogin }) => {
-  const { values, handleChange } = useFormWithValidation();
-
-  const history = useHistory();
+const Login = ({ onLogin, errorSubmit, setErrorSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onLogin(values);
-    history.push("/movies");
   };
+
+  useEffect(()=> {
+    resetForm()
+  },[resetForm])
 
   return (
     <AuthForm
@@ -20,9 +21,14 @@ const Login = ({ onLogin }) => {
       text="Ещё не зарегистрированы?"
       textLink="Регистрация"
       linkPath="/signup"
+      textError='Авторизация не удалась'
       values={values}
       onSubmit={handleSubmit}
       onChange={handleChange}
+      errors={errors}
+      isValid={isValid}
+      errorSubmit={errorSubmit}
+      setErrorSubmit={setErrorSubmit}
     ></AuthForm>
   );
 };

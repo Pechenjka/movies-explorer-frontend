@@ -5,17 +5,13 @@ import useFormWithValidation from "../../hooks/useForm";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-const Profile = ({ onSignOut, onUpdateUser, loggedIn }) => {
+const Profile = ({ onSignOut, onUpdateUser, loggedIn, errorSubmit }) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
-  const { values, handleChange, resetForm } = useFormWithValidation();
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
   const isDisabledInput = isEditProfile === false && "disabled";
 
   const currentUser = useContext(CurrentUserContext);
-
-  // useEffect(() => {
-  //   handleLoggidIn();
-  // }, [handleLoggidIn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,12 +35,16 @@ const Profile = ({ onSignOut, onUpdateUser, loggedIn }) => {
               type="text"
               name="name"
               id="name"
+              minLength="2"
+              maxLength="30"
               disabled={isDisabledInput}
               required
               value={values.name || ""}
               onChange={handleChange}
             />
-            <span id="text-error"></span>
+            <span className="profile__form_span" id="text-error">
+              {errors.name}
+            </span>
             <label className="profile__form_label">E-mail</label>
             <input
               className="profile__form_input"
@@ -56,14 +56,23 @@ const Profile = ({ onSignOut, onUpdateUser, loggedIn }) => {
               value={values.email || ""}
               onChange={handleChange}
             />
-            <span id="email-error"></span>
+            <span className="profile__form_span" id="email-error">
+              {errors.email}
+            </span>
           </fieldset>
           {isEditProfile === true ? (
             <Fragment>
-              <span className="profile__saved-button-span" id="text-error">
+              <span
+                className={`profile__saved-button-span ${errorSubmit ? "profile__saved-button-span_active" : ""}`}
+                id="text-error"
+              >
                 При обновлении профиля произошла ошибка.
               </span>
-              <button className="profile__saved-button" type="submit">
+              <button
+                className={`profile__saved-button ${!isValid ? "profile__saved-button_disabled" : ""}`}
+                type="submit"
+                disabled={!isValid}
+              >
                 Сохранить
               </button>
             </Fragment>

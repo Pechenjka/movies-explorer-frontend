@@ -18,6 +18,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorSubmit, setErrorSubmit] = useState(false)
 
   const history = useHistory();
 
@@ -43,6 +44,7 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
+          handleErrorSubmit()
           console.log({ message: "Некорректно заполнено одно из полей" });
         }
       });
@@ -60,10 +62,12 @@ const App = () => {
           localStorage.setItem("jwt", res.token);
           handleGetUserInfo();
           setLoggedIn(true);
+          history.push("/movies");
         }
       })
       .catch((err) => {
         if (err) {
+          handleErrorSubmit()
           console.log({ message: "Необходимо пройти регистрацию" });
         }
       });
@@ -97,12 +101,19 @@ const App = () => {
     const { email, name } = values;
     mainApi.setUserInfo(email, name).then((res) => {
       setCurrentUser(res);
-    });
+    })
+    .catch((err) => {
+      if (err) {
+        handleErrorSubmit()
+        console.log({ message: "При обновлении профиля произошла ошибка" });
+      }
+    })
   };
 
-  const handleLoggidIn = () => {
-    setLoggedIn(true);
+  const handleErrorSubmit = () => {
+    setErrorSubmit(true)
   };
+
   const handleIsLoading = () => {
     setIsLoading(false);
   };
@@ -138,12 +149,13 @@ const App = () => {
             loggedIn={loggedIn}
             onSignOut={handleSignOut}
             onUpdateUser={handleUpdateUser}
+            errorSubmit={errorSubmit}
           />
           <Route exact path="/signup">
-            <Register onRegister={handleRegister} />
+            <Register onRegister={handleRegister} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit}/>
           </Route>
           <Route exact path="/signin">
-            <Login onLogin={handleLogin} />
+            <Login onLogin={handleLogin} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit}/>
           </Route>
           <Route path="*">
             <NotFound />

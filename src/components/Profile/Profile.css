@@ -29,14 +29,15 @@
   border: none;
   outline: none;
 }
-.profile__form_label {
+/* .profile__form_label {
   font-style: normal;
   width: 40px;
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
   border-bottom: 1px solid rgba(66, 66, 66, 1);
-  margin: 0 0 17px;
+
+  margin: 0;
 }
 .profile__form_label:last-of-type {
   border: none;
@@ -51,7 +52,8 @@
   outline: none;
   color: white;
   border-bottom: 1px solid rgba(66, 66, 66, 1);
-  margin: 0 0 17px;
+
+  margin: 0;
   font-style: normal;
   font-weight: normal;
   font-size: 11px;
@@ -61,6 +63,59 @@
   border: none;
   margin: 0;
   padding: 0;
+} */
+.profile__form_label {
+  font-style: normal;
+  width: 40px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  /* border-bottom: 1px solid rgba(66, 66, 66, 1); */
+  /* margin: 0 0 17px; */
+  margin: 0;
+}
+.profile__form_label:last-of-type {
+  border: none;
+  margin: 17px 0 0 ;
+}
+.profile__form_input {
+  width: 370px;
+  padding: 0;
+  text-align: right;
+  border: none;
+  background-color: black;
+  outline: none;
+  color: white;
+  /* border-bottom: 1px solid rgba(66, 66, 66, 1); */
+  /* margin: 0 0 17px; */
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+}
+.profile__form_input:last-of-type {
+  border: none;
+  margin: 17px 0 0 ;
+  padding: 0;
+}
+.profile__form_span {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  min-height: 17px;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(255, 0, 76, 1);
+  width: 100%;
+  text-align: end;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+
+.profile__form_span:last-of-type {
+  border-bottom: none;
+
 }
 .profile__form_button {
   font-style: normal;
@@ -116,8 +171,16 @@
   transition: 0.3s linear all;
 }
 
+.profile__saved-button_disabled {
+  background: rgba(248, 248, 248, 1);
+  color: rgba(194, 194, 194, 1);
+}
+.profile__saved-button_disabled:hover {
+  cursor: default;
+  opacity: initial;
+}
 .profile__saved-button-span {
-  display: block;
+  opacity: 0;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -125,6 +188,10 @@
   color: rgba(255, 0, 76, 1);
   margin: 190px 0 0;
 }
+.profile__saved-button-span_active {
+  opacity: 1;
+}
+
 
 @media screen and (max-width:767px) {
   .profile {
@@ -148,7 +215,7 @@
     line-height: 15px;
     margin: 380px 0 0;
   }
-  
+
   .profile__form_link {
     font-size: 12px;
     line-height: 15px;
