@@ -13,12 +13,16 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import mainApi from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import moviesApi from "../../utils/MoviesApi";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorSubmit, setErrorSubmit] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorSubmit, setErrorSubmit] = useState(false);
+  // const [movies, setMovies] = useState([]);
+  const [showMovies, setShowMovies] = useState([]);
+  const [isShortMovies, setIsShortMovies] = useState(false);
 
   const history = useHistory();
 
@@ -29,6 +33,34 @@ const App = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    moviesApi
+      .searchFilms()
+      .then((res) => {
+        if (res) {
+          localStorage.setItem("storageMovies", JSON.stringify(res));
+          // setMovies(res);
+          console.log(res);
+        }
+      })
+      .catch(() => {
+        console.log({ message: "Фильмы не получены х.з. почему" });
+      });
+  }, []);
+
+  const handleSearchFilms = (word) => {
+    const storageMovies = JSON.parse(localStorage.getItem("storageMovies"));
+    const searchByWords = storageMovies.filter((item) => {
+      if (isShortMovies) {
+       return item.duration <= 40 && item.year.toLowerCase().includes(word);
+      }
+      // console.log(item.nameRU);
+      return item.year.toLowerCase().includes(word);
+    });
+    setShowMovies(searchByWords);
+  };
+
 
   const handleRegister = (values) => {
     const { name, email, password } = values;
@@ -44,7 +76,7 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
-          handleErrorSubmit()
+          handleErrorSubmit();
           console.log({ message: "Некорректно заполнено одно из полей" });
         }
       });
@@ -67,7 +99,7 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
-          handleErrorSubmit()
+          handleErrorSubmit();
           console.log({ message: "Необходимо пройти регистрацию" });
         }
       });
@@ -99,23 +131,21 @@ const App = () => {
 
   const handleUpdateUser = (values) => {
     const { email, name } = values;
-    mainApi.setUserInfo(email, name).then((res) => {
-      setCurrentUser(res);
-    })
-    .catch((err) => {
-      if (err) {
-        handleErrorSubmit()
-        console.log({ message: "При обновлении профиля произошла ошибка" });
-      }
-    })
+    mainApi
+      .setUserInfo(email, name)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        if (err) {
+          handleErrorSubmit();
+          console.log({ message: "При обновлении профиля произошла ошибка" });
+        }
+      });
   };
 
   const handleErrorSubmit = () => {
-    setErrorSubmit(true)
-  };
-
-  const handleIsLoading = () => {
-    setIsLoading(false);
+    setErrorSubmit(true);
   };
 
   return (
@@ -132,16 +162,13 @@ const App = () => {
             path="/movies"
             component={Movies}
             loggedIn={loggedIn}
-            handleIsLoading={handleIsLoading}
             isLoading={isLoading}
+            onSearchFilms={handleSearchFilms}
+            showMovies={showMovies}
+            setIsShortMovies={setIsShortMovies}
+            isShortMovies={isShortMovies}
           />
-          <ProtectedRoute
-            exact
-            path="/saved-movies"
-            component={SavedMovies}
-            loggedIn={loggedIn}
-            handleIsLoading={handleIsLoading}
-          />
+          <ProtectedRoute exact path="/saved-movies" component={SavedMovies} loggedIn={loggedIn} />
           <ProtectedRoute
             exact
             path="/profile"
@@ -152,10 +179,10 @@ const App = () => {
             errorSubmit={errorSubmit}
           />
           <Route exact path="/signup">
-            <Register onRegister={handleRegister} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit}/>
+            <Register onRegister={handleRegister} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit} />
           </Route>
           <Route exact path="/signin">
-            <Login onLogin={handleLogin} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit}/>
+            <Login onLogin={handleLogin} errorSubmit={errorSubmit} setErrorSubmit={setErrorSubmit} />
           </Route>
           <Route path="*">
             <NotFound />
