@@ -20,7 +20,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorSubmit, setErrorSubmit] = useState(false);
-  // const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [showMovies, setShowMovies] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
 
@@ -34,33 +34,76 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
+  //Сохранение массива фильмов из внешнего API в локальное хранилище
+  const getMovies = () => {
+    setIsLoading(true);
     moviesApi
       .searchFilms()
       .then((res) => {
         if (res) {
           localStorage.setItem("storageMovies", JSON.stringify(res));
-          // setMovies(res);
           console.log(res);
+          console.log(window.innerWidth);
         }
       })
-      .catch(() => {
-        console.log({ message: "Фильмы не получены х.з. почему" });
-      });
-  }, []);
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  };
 
-  const handleSearchFilms = (word) => {
+  useEffect(() => {
+    if (loggedIn) {
+      getMovies();
+    }
+  }, [loggedIn]);
+
+  // Поиск фильмов по ключевым словам в локальном хранилище
+  const handleSearchByWord = (word) => {
     const storageMovies = JSON.parse(localStorage.getItem("storageMovies"));
     const searchByWords = storageMovies.filter((item) => {
       if (isShortMovies) {
-       return item.duration <= 40 && item.year.toLowerCase().includes(word);
+        return item.duration <= 40 && item.year.toLowerCase().includes(word);
       }
-      // console.log(item.nameRU);
       return item.year.toLowerCase().includes(word);
     });
-    setShowMovies(searchByWords);
+    setMovies(searchByWords);
+    handleSearchFilms(searchByWords);
   };
 
+  //В зависимости от разрешения показывать разное кол-во фильмов
+  const handleSearchFilms = (searchByWords) => {
+    const handleShowMoviesWindowWidth = () => {
+      if (window.innerWidth >= 1280) {
+        const showMovieMaxWidth = searchByWords.slice(0, 12);
+        console.log(showMovieMaxWidth);
+        return showMovieMaxWidth;
+      }
+      if (window.innerWidth >= 768) {
+        const showMovieMedWidth = searchByWords.slice(0, 8);
+        console.log(showMovieMedWidth);
+        return showMovieMedWidth;
+      }
+      if (window.innerWidth >= 320) {
+        const showMovieMinWidth = searchByWords.slice(0, 5);
+        console.log(showMovieMinWidth);
+        return showMovieMinWidth;
+      }
+    };
+    setShowMovies(handleShowMoviesWindowWidth);
+  };
+
+  //Показывать дополнительные фильмы кликом по кнопке
+  const handleAddMovies = () => {
+    if (window.innerWidth >= 1280) {
+      const addMoviesMaxWidth = movies.slice(0, showMovies.length + 3);
+      console.log(addMoviesMaxWidth);
+      return addMoviesMaxWidth;
+    }
+    if (window.innerWidth >= 320) {
+      const addMoviesMinWidth = movies.slice(0, showMovies.length + 2);
+      console.log(addMoviesMinWidth);
+      return addMoviesMinWidth;
+    }
+  };
 
   const handleRegister = (values) => {
     const { name, email, password } = values;
@@ -163,10 +206,15 @@ const App = () => {
             component={Movies}
             loggedIn={loggedIn}
             isLoading={isLoading}
-            onSearchFilms={handleSearchFilms}
+            // onSearchFilms={handleSearchFilms}
+            movies={movies}
+            onSearchFilms={handleSearchByWord}
             showMovies={showMovies}
             setIsShortMovies={setIsShortMovies}
             isShortMovies={isShortMovies}
+            handleAddMovies={handleAddMovies}
+            setShowMovies={setShowMovies}
+            handleSearchFilms={handleSearchFilms}
           />
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies} loggedIn={loggedIn} />
           <ProtectedRoute
