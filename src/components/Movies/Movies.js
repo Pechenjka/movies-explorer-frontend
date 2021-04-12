@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import useFormWithValidation from "../../hooks/useForm";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -18,7 +18,10 @@ const Movies = (props) => {
     handleAddMovies,
     setShowMovies,
     movies,
+    handleLikeClick,
   } = props;
+
+  // const [isSavedMovieButton, setIsSavedMovieButton] = useState(false);
 
   const { values, handleChange, resetForm } = useFormWithValidation();
 
@@ -30,9 +33,17 @@ const Movies = (props) => {
 
   const handleChangeAddMovies = () => {
     setShowMovies(handleAddMovies);
-    console.log(movies);
-    console.log(showMovies);
   };
+
+  // const isSavedCard = () => {
+  //   isSavedMovieButton == true ?
+  //    setIsSavedMovieButton(true)
+
+  // const deleteMovie = isSavedMovieButton === true ? handleDeleteSavedMovie() : handleSavedMovies();
+  // }
+  // useEffect(() => {
+  //   isSavedCard();
+  // }, []);
 
   const hiddenButton = showMovies.length <= 3 || showMovies.length === movies.length ? "movies__button_hidden" : "";
 
@@ -47,7 +58,14 @@ const Movies = (props) => {
           setIsShortMovies={setIsShortMovies}
           isShortMovies={isShortMovies}
         />
-        {isLoading === true ? <Preloader /> : <MoviesCardList showMovies={showMovies} />}
+        {isLoading === true ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            showMovies={showMovies}
+            handleLikeClick={handleLikeClick}
+          />
+        )}
         <button className={`movies__button ${hiddenButton}`} onClick={handleChangeAddMovies}>
           Еще
         </button>

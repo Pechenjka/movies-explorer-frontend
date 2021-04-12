@@ -4,16 +4,19 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import useFormWithValidation from "../../hooks/useForm";
 
 const SavedMovies = (props) => {
-  const { loggedIn } = props;
+  const { loggedIn, isSavedMovie, onSearchFilms, handleLikeClick } = props;
   const [isSaved, setIsSaved] = useState(false);
 
-  const savedCards = [{ id: "1" }, { id: "2" }, { id: "3" }];
+  const { values, handleChange, resetForm } = useFormWithValidation();
 
-  // useEffect(() => {
-  //   handleLoggidIn();
-  // }, [handleLoggidIn]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearchFilms(values.name);
+    resetForm();
+  };
 
   useEffect(() => {
     setIsSaved(true);
@@ -23,8 +26,8 @@ const SavedMovies = (props) => {
     <Fragment>
       <Header loggedIn={loggedIn} />
       <section className="savedMovies">
-        <SearchForm />
-        <MoviesCardList cards={savedCards} isSaved={isSaved} />
+        <SearchForm onSubmit={handleSubmit} values={values} handleChange={handleChange} isSaved={isSaved} />
+        <MoviesCardList showMovies={isSavedMovie} isSaved={isSaved} handleLikeClick={handleLikeClick}/>
       </section>
       <Footer />
     </Fragment>

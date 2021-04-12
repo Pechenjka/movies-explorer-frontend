@@ -6,6 +6,33 @@ class MainApi {
     this._headers = options.headers;
   }
 
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "GET",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
+  getContent() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
   register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
@@ -30,23 +57,6 @@ class MainApi {
       .then((res) => res);
   }
 
-  getContent() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
-    })
-      .then(checkResponse)
-      .then((res) => res);
-  }
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
-      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
-    })
-      .then(checkResponse)
-      .then((res) => res);
-  }
-
   setUserInfo(email, name) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -55,6 +65,34 @@ class MainApi {
         email,
         name,
       }),
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
+  savedMovies(data) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      body: JSON.stringify(data),
+    })
+      .then(checkResponse)
+      .then((res) => res);
+  }
+
+  // getSavedMovies() {
+  //   return fetch(`${this._baseUrl}/movies`, {
+  //     method: "GET",
+  //     headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
+  //   })
+  //     .then(checkResponse)
+  //     .then((res) => res);
+  // }
+
+  deleteSavedMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: "DELETE",
+      headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
     })
       .then(checkResponse)
       .then((res) => res);
