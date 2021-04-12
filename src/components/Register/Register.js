@@ -1,14 +1,34 @@
 import AuthForm from "../AuthForm/AuthForm";
+import useFormWithValidation from "../../hooks/useForm";
+import { useEffect } from "react";
 
+const Register = ({ onRegister, errorSubmit, setErrorSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
-const Register = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onRegister(values);
+  };
+
+  useEffect(()=> {
+    resetForm()
+  },[resetForm])
+
   return (
     <AuthForm
       title="Добро пожаловать!"
       buttonName="Зарегистрироваться"
       text="Уже зарегистрированы?"
       textLink="Войти"
-      linkPath='/signin'
+      linkPath="/signin"
+      textError='Регистрация не удалась'
+      values={values}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      errors={errors}
+      isValid={isValid}
+      errorSubmit={errorSubmit}
+      setErrorSubmit={setErrorSubmit}
     ></AuthForm>
   );
 };

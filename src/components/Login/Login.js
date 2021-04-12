@@ -1,6 +1,19 @@
+import { useEffect } from "react";
+import useFormWithValidation from "../../hooks/useForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-const Login = () => {
+const Login = ({ onLogin, errorSubmit, setErrorSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onLogin(values);
+  };
+
+  useEffect(()=> {
+    resetForm()
+  },[resetForm])
+
   return (
     <AuthForm
       title="Рады видеть!"
@@ -8,7 +21,15 @@ const Login = () => {
       text="Ещё не зарегистрированы?"
       textLink="Регистрация"
       linkPath="/signup"
-    />
+      textError='Авторизация не удалась'
+      values={values}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      errors={errors}
+      isValid={isValid}
+      errorSubmit={errorSubmit}
+      setErrorSubmit={setErrorSubmit}
+    ></AuthForm>
   );
 };
 
