@@ -137,11 +137,9 @@ const App = () => {
       })
     ) {
       if (!data._id) {
-        // console.log(data);
         data = isSavedMovie.find((item) => {
           return item.movieId === data.movieId;
         });
-        console.log(data);
       }
       if (data._id) {
         return mainApi
