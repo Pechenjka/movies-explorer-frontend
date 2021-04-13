@@ -1,24 +1,27 @@
-import { useState } from "react";
-// import { useLocation } from "react-router";
+import { useEffect, useState } from "react";
 import "./MoviesCard.css";
 
 const MoviesCard = (props) => {
-  const { item, isSaved, handleLikeClick } = props;
-  // const path = useLocation()
-  // const SaveAndDeleteMovie = path ==='/saved-movie'? item._id : item
-
-  const handleSavedMovieClick = () => {
-    handleLikeClick(item)
-    setIsSavedMovieButton(!isSavedMovieButton)
-  };
-
+  const { item, isSaved, handleLikeClick, isSavedMovie } = props;
   const [isSavedMovieButton, setIsSavedMovieButton] = useState(false);
 
-  // const isSaved = isSavedMovie.some((item) => item.movieId === showMovies.movieId)
+  const handleSavedMovieClick = () => {
+    handleLikeClick(item);
+    setIsSavedMovieButton(!isSavedMovieButton);
+  };
+
+  useEffect(() => {
+    setIsSavedMovieButton(
+      isSavedMovie.some((data) => {
+        return data.movieId === item.movieId;
+      })
+    );
+    // eslint-disable-next-line
+  }, []);
 
   const saved = `card__button-saved-movie ${
     (isSaved === true ? "card__button-icon-saved" : "") ||
-    (isSavedMovieButton === true ? "card__button-icon-handleSaved" : '')
+    (isSavedMovieButton === true ? "card__button-icon-handleSaved" : "")
   }`;
 
   const getTime = (mins) => {

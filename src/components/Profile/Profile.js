@@ -5,7 +5,9 @@ import useFormWithValidation from "../../hooks/useForm";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-const Profile = ({ onSignOut, onUpdateUser, loggedIn, errorSubmit }) => {
+const Profile = (props) => {
+  const { onSignOut, onUpdateUser, loggedIn, errorSubmit } = props;
+  
   const [isEditProfile, setIsEditProfile] = useState(false);
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 

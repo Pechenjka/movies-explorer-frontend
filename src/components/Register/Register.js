@@ -2,7 +2,9 @@ import AuthForm from "../AuthForm/AuthForm";
 import useFormWithValidation from "../../hooks/useForm";
 import { useEffect } from "react";
 
-const Register = ({ onRegister, errorSubmit, setErrorSubmit }) => {
+const Register = (props) => {
+  const { onRegister, errorSubmit, setErrorSubmit } = props;
+
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const handleSubmit = (event) => {
@@ -10,9 +12,9 @@ const Register = ({ onRegister, errorSubmit, setErrorSubmit }) => {
     onRegister(values);
   };
 
-  useEffect(()=> {
-    resetForm()
-  },[resetForm])
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <AuthForm
@@ -21,7 +23,7 @@ const Register = ({ onRegister, errorSubmit, setErrorSubmit }) => {
       text="Уже зарегистрированы?"
       textLink="Войти"
       linkPath="/signin"
-      textError='Регистрация не удалась'
+      textError="Регистрация не удалась"
       values={values}
       onSubmit={handleSubmit}
       onChange={handleChange}

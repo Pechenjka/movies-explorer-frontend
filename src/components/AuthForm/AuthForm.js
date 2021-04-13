@@ -4,7 +4,21 @@ import Logo from "../../images/logo-header.svg";
 import { Fragment } from "react";
 
 const AuthForm = (props) => {
-  const { title, buttonName, textLink, text, linkPath, values, onSubmit, onChange, errors, isValid, errorSubmit, setErrorSubmit, textError } = props;
+  const {
+    title,
+    buttonName,
+    textLink,
+    text,
+    linkPath,
+    values,
+    onSubmit,
+    onChange,
+    errors,
+    isValid,
+    errorSubmit,
+    setErrorSubmit,
+    textError,
+  } = props;
   const { pathname } = useLocation();
 
   return (
@@ -49,7 +63,7 @@ const AuthForm = (props) => {
           </span>
           <label className="form__label">Пароль</label>
           <input
-            className="form__input"
+            className={`form__input ${errors.password ? "form__input_inValid" : ""}`}
             type="password"
             name="password"
             id="password"
@@ -62,7 +76,12 @@ const AuthForm = (props) => {
             {errors.password}
           </span>
         </fieldset>
-        <span className={`form__span form__span-error-button ${ errorSubmit === true ? "form__span-error-button_active": ''} `} id="text-error">
+        <span
+          className={`form__span form__span-error-button ${
+            errorSubmit === true ? "form__span-error-button_active" : ""
+          } `}
+          id="text-error"
+        >
           {textError}
         </span>
         <button className={`form__button ${!isValid ? "form__button_disabled" : ""}`} type="submit" disabled={!isValid}>
@@ -70,7 +89,7 @@ const AuthForm = (props) => {
         </button>
         <p className="form__link-text">
           {text}
-          <Link className="form__link" to={linkPath} onClick={()=> setErrorSubmit(false)}>
+          <Link className="form__link" to={linkPath} onClick={() => setErrorSubmit(false)}>
             {textLink}
           </Link>
         </p>
