@@ -6,7 +6,7 @@ import { Fragment } from "react";
 const AuthForm = (props) => {
   const { title, buttonName, textLink, text, linkPath, values, onSubmit, onChange, errors, isValid, errorSubmit, setErrorSubmit, textError } = props;
   const { pathname } = useLocation();
-
+console.log(errors.password);
   return (
     <div className="authForm">
       <Link to="/">
@@ -49,7 +49,7 @@ const AuthForm = (props) => {
           </span>
           <label className="form__label">Пароль</label>
           <input
-            className="form__input"
+            className={`form__input ${errors.password ? 'form__input_inValid': ''}`}
             type="password"
             name="password"
             id="password"
