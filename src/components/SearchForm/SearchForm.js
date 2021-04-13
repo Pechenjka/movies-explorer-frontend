@@ -3,8 +3,8 @@ import logoSearch from "../../images/logo-search.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 
-const SearchForm = ({onSubmit, handleChange, values, setIsShortMovies, isShortMovies}) => {
-
+const SearchForm = (props) => {
+const {onSubmit, handleChange, values, setIsShortMovies, isShortMovies} = props
 
   return (
     <section className="searchForm">

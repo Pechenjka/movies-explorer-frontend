@@ -6,6 +6,8 @@ const FilterCheckbox = ({setIsShortMovies, isShortMovies}) => {
     setIsShortMovies(!isShortMovies)
   }
 
+
+
   return (
     <fieldset className="filterCheckbox">
       <label className="filterCheckbox__input-switch">

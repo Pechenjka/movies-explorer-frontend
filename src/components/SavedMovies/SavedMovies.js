@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import useFormWithValidation from "../../hooks/useForm";
 
 const SavedMovies = (props) => {
-  const { loggedIn, isSavedMovie, onSearchFilms, handleLikeClick } = props;
+  const { loggedIn, isSavedMovie, onSearchFilms, handleLikeClick, isNotFoundSearch } = props;
   const [isSaved, setIsSaved] = useState(false);
 
   const { values, handleChange, resetForm } = useFormWithValidation();
@@ -27,7 +27,7 @@ const SavedMovies = (props) => {
       <Header loggedIn={loggedIn} />
       <section className="savedMovies">
         <SearchForm onSubmit={handleSubmit} values={values} handleChange={handleChange} isSaved={isSaved} />
-        <MoviesCardList showMovies={isSavedMovie} isSaved={isSaved} handleLikeClick={handleLikeClick}/>
+        <MoviesCardList showMovies={isSavedMovie} isSaved={isSaved} handleLikeClick={handleLikeClick} isSavedMovie={isSavedMovie} isNotFoundSearch={isNotFoundSearch}/>
       </section>
       <Footer />
     </Fragment>

@@ -24,6 +24,7 @@ const App = () => {
   const [showMovies, setShowMovies] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState([]);
+  const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
 
   const history = useHistory();
 
@@ -42,26 +43,32 @@ const App = () => {
     }
   }, [loggedIn]);
 
+
+  useEffect(() => {
+    console.log("Все фильмы =>", movies);
+    console.log("Показанные фильмы =>", showMovies);
+    console.log("Сохраненные =>", isSavedMovie);
+  }, [isSavedMovie, movies, showMovies]);
+
   //Сохранение массива фильмов из внешнего API в локальное хранилище
   const getMovies = () => {
     setIsLoading(true);
     moviesApi
       .searchFilms()
       .then((res) => {
-        // console.log(res);
-        res.map((item) => {
+        return res.map((item) => {
           return {
-            country: item.country,
-            director: item.director,
-            duration: item.duration,
-            year: item.year,
-            description: item.description,
+            country: item.country || "",
+            director: item.director || "",
+            duration: item.duration || "",
+            year: item.year || "",
+            description: item.description || "",
             image: !item.image ? "" : `https://api.nomoreparties.co${item.image.url}`,
             trailer: item.trailerLink,
             thumbnail: !item.image ? "" : `https://api.nomoreparties.co${item.image.formats.thumbnail.url}`,
-            movieId: item.id,
-            nameRU: item.nameRU,
-            nameEN: item.nameEN,
+            movieId: item.id || "",
+            nameRU: item.nameRU || "",
+            nameEN: item.nameEN || "",
           };
         });
       })
@@ -85,6 +92,7 @@ const App = () => {
     });
     setMovies(searchByWords);
     handleSearchFilms(searchByWords);
+    setIsNotFoundSearch(true);
   };
 
   //В зависимости от разрешения показывать разное кол-во фильмов
@@ -92,17 +100,14 @@ const App = () => {
     const handleShowMoviesWindowWidth = () => {
       if (window.innerWidth >= 1280) {
         const showMovieMaxWidth = searchByWords.slice(0, 12);
-        console.log(showMovieMaxWidth);
         return showMovieMaxWidth;
       }
       if (window.innerWidth >= 768) {
         const showMovieMedWidth = searchByWords.slice(0, 8);
-        console.log(showMovieMedWidth);
         return showMovieMedWidth;
       }
       if (window.innerWidth >= 320) {
         const showMovieMinWidth = searchByWords.slice(0, 5);
-        console.log(showMovieMinWidth);
         return showMovieMinWidth;
       }
     };
@@ -113,12 +118,10 @@ const App = () => {
   const handleAddMovies = () => {
     if (window.innerWidth >= 1280) {
       const addMoviesMaxWidth = movies.slice(0, showMovies.length + 3);
-      console.log(addMoviesMaxWidth);
       return addMoviesMaxWidth;
     }
     if (window.innerWidth >= 320) {
       const addMoviesMinWidth = movies.slice(0, showMovies.length + 2);
-      console.log(addMoviesMinWidth);
       return addMoviesMinWidth;
     }
   };
@@ -137,11 +140,14 @@ const App = () => {
   // };
 
   const handleGetSavedMovies = () => {
-    mainApi.getSavedMovies().then((res) => {
-      if (res) {
-        setIsSavedMovie(res);
-      }
-    });
+    mainApi
+      .getSavedMovies()
+      .then((res) => {
+        if (res) {
+          setIsSavedMovie(res);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   // const handleDeleteSavedMovie = (data) => {
@@ -155,12 +161,6 @@ const App = () => {
   //     })
   //     .catch((err) => console.log(err));
   // };
-
-  // function doubleSavedMovies(data) {
-  //   setIsSavedMovie(data);
-  //   setShowMovies(data);
-  //   // localStorage.setItem("savedMovies", JSON.stringify(data));
-  // }
 
   function handleLikeClick(data) {
     if (
@@ -181,7 +181,7 @@ const App = () => {
           .deleteSavedMovie(data._id)
           .then((res) => {
             if (res) {
-              const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data._id);
+              const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data.movieId);
               setIsSavedMovie(isDeletedMovie);
             }
           })
@@ -205,43 +205,6 @@ const App = () => {
   //     // console.log("Добавлнный фильм =>", res);
   //     doubleSavedMovies([...savedMovies, res]);
   //   });
-  // }
-
-  // function handleLikeClick(data) {
-  //   console.log("Поступившие данные", data);
-  //   // mainApi.postMovie(data).then((res) => console.log(res));
-  //   // Если фильм с таким movieId не содержится в savedMovies, то выполняем добавление фильма
-  //   console.log("Сохраненные фильмы", savedMovies);
-  //   if (
-  //     savedMovies &&
-  //     savedMovies.find((item) => {
-  //       return item.movieId === data.movieId;
-  //     })
-  //   ) {
-  //     console.log("Фильм уже добавлен => будем удалять");
-
-  //     if (!data._id) {
-  //       // console.log(data);
-  //       data = savedMovies.find((item) => {
-  //         return item.movieId === data.movieId;
-  //       });
-  //       console.log(data);
-  //     }
-
-  //     return mainApi.deleteMovie(data).then((res) => {
-  //       // console.log(res);
-  //       const filteredMovies = savedMovies.filter((item) => {
-  //         return item.movieId !== data.movieId;
-  //       });
-  //       doubleSavedMovies(filteredMovies);
-  //     });
-  //   } else {
-  //     console.log("Фильма нет такого => будем добавлять");
-  //     return mainApi.postMovie(data).then((res) => {
-  //       // console.log("Добавлнный фильм =>", res);
-  //       doubleSavedMovies([...savedMovies, res]);
-  //     });
-  //   }
   // }
 
   const handleRegister = (values) => {
@@ -330,8 +293,6 @@ const App = () => {
     setErrorSubmit(true);
   };
 
-
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -355,6 +316,8 @@ const App = () => {
             handleAddMovies={handleAddMovies}
             setShowMovies={setShowMovies}
             handleLikeClick={handleLikeClick}
+            isSavedMovie={isSavedMovie}
+            isNotFoundSearch={isNotFoundSearch}
           />
           <ProtectedRoute
             exact
@@ -364,6 +327,7 @@ const App = () => {
             loggedIn={loggedIn}
             isSavedMovie={isSavedMovie}
             handleLikeClick={handleLikeClick}
+            isNotFoundSearch={isNotFoundSearch}
           />
           <ProtectedRoute
             exact

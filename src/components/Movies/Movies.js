@@ -19,9 +19,9 @@ const Movies = (props) => {
     setShowMovies,
     movies,
     handleLikeClick,
+    isSavedMovie,
+    isNotFoundSearch,
   } = props;
-
-  // const [isSavedMovieButton, setIsSavedMovieButton] = useState(false);
 
   const { values, handleChange, resetForm } = useFormWithValidation();
 
@@ -34,16 +34,6 @@ const Movies = (props) => {
   const handleChangeAddMovies = () => {
     setShowMovies(handleAddMovies);
   };
-
-  // const isSavedCard = () => {
-  //   isSavedMovieButton == true ?
-  //    setIsSavedMovieButton(true)
-
-  // const deleteMovie = isSavedMovieButton === true ? handleDeleteSavedMovie() : handleSavedMovies();
-  // }
-  // useEffect(() => {
-  //   isSavedCard();
-  // }, []);
 
   const hiddenButton = showMovies.length <= 3 || showMovies.length === movies.length ? "movies__button_hidden" : "";
 
@@ -63,7 +53,11 @@ const Movies = (props) => {
         ) : (
           <MoviesCardList
             showMovies={showMovies}
+            movies={movies}
             handleLikeClick={handleLikeClick}
+            isSavedMovie={isSavedMovie}
+            isNotFoundSearch={isNotFoundSearch}
+
           />
         )}
         <button className={`movies__button ${hiddenButton}`} onClick={handleChangeAddMovies}>
