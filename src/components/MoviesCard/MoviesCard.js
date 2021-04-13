@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./MoviesCard.css";
 
 const MoviesCard = (props) => {
-  const { item, isSaved, handleLikeClick, isSavedMovie} = props;
+  const { item, isSaved, handleLikeClick, isSavedMovie } = props;
   const [isSavedMovieButton, setIsSavedMovieButton] = useState(false);
 
   const handleSavedMovieClick = () => {
@@ -16,29 +16,8 @@ const MoviesCard = (props) => {
         return data.movieId === item.movieId;
       })
     );
-        // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
-
-  // useEffect(() => {
-  //   if (isShortMovies && showMovies.length >= 1) {
-  //     setShowMovies(
-  //       showMovies.filter((data) => {
-  //         return data.duration <= 40 === item.duration <= 40;
-  //       })
-  //     );
-  //   }
-  // }, []);
-
-  //  useEffect(() => {
-  //     if (isShortMovies && showMovies.length >= 1) {
-  //       console.log(showMovies);
-  //       setShowMovies(
-  //         showMovies.filter((data) => {
-  //           return data.duration <= 40;
-  //         })
-  //       );
-  //     }
-  //   }, [isShortMovies, showMovies]);
 
   const saved = `card__button-saved-movie ${
     (isSaved === true ? "card__button-icon-saved" : "") ||

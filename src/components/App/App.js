@@ -41,12 +41,6 @@ const App = () => {
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    console.log("Все фильмы =>", movies);
-    console.log("Показанные фильмы =>", showMovies);
-    console.log("Сохраненные =>", isSavedMovie);
-  }, [isSavedMovie, movies, showMovies]);
-
   //Сохранение массива фильмов из внешнего API в локальное хранилище
   const getMovies = () => {
     setIsLoading(true);
@@ -122,20 +116,7 @@ const App = () => {
       return addMoviesMinWidth;
     }
   };
-
-  // const handleSavedMovies = (movie) => {
-  //   // const isSaved = showMovies.some((item) => item.movieId === movie.movieId)
-  //   // console.log(movie, isSaved);
-  //   mainApi
-  //     .savedMovies(movie)
-  //     .then((newMovie) => {
-  //       if (newMovie) {
-  //         setIsSavedMovie([...isSavedMovie, newMovie]);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
+//Отображение сохраненных фильмов
   const handleGetSavedMovies = () => {
     mainApi
       .getSavedMovies()
@@ -147,18 +128,7 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  // const handleDeleteSavedMovie = (data) => {
-  //   mainApi
-  //     .deleteSavedMovie(data._id)
-  //     .then((res) => {
-  //       if (res) {
-  //         const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data._id);
-  //         setIsSavedMovie(isDeletedMovie);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
+//Функция сохранения и удаления фильмов
   function handleLikeClick(data) {
     if (
       isSavedMovie &&
@@ -180,6 +150,7 @@ const App = () => {
             if (res) {
               const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data.movieId);
               setIsSavedMovie(isDeletedMovie);
+              setIsNotFoundSearch(false)
             }
           })
           .catch((err) => console.log(err));
@@ -195,15 +166,7 @@ const App = () => {
         .catch((err) => console.log(err));
     }
   }
-
-  // } else {
-  //   console.log("Фильма нет такого => будем добавлять");
-  //   return mainApi.postMovie(data).then((res) => {
-  //     // console.log("Добавлнный фильм =>", res);
-  //     doubleSavedMovies([...savedMovies, res]);
-  //   });
-  // }
-
+//Регистрация пользователя
   const handleRegister = (values) => {
     const { name, email, password } = values;
     mainApi
@@ -223,7 +186,7 @@ const App = () => {
         }
       });
   };
-
+//Авторизация пользователя
   const handleLogin = (values) => {
     const { email, password } = values;
     mainApi
@@ -256,14 +219,14 @@ const App = () => {
       }
     });
   };
-
+//Получения данных текущего пользователя
   const handleGetUserInfo = () => {
     mainApi
       .getUserInfo()
       .then((res) => setCurrentUser(res))
       .catch(() => console.log("Пользователь не найден"));
   };
-
+//Фукнция выхода из аккаунта
   const handleSignOut = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -271,7 +234,7 @@ const App = () => {
       setLoggedIn(false);
     }
   };
-
+//Обновление данных пользователя
   const handleUpdateUser = (values) => {
     const { email, name } = values;
     mainApi
@@ -296,9 +259,7 @@ const App = () => {
       <div className="page">
         <Switch>
           <Route exact path="/">
-            {/* <Header /> */}
             <Main loggedIn={loggedIn} />
-            {/* <Footer /> */}
           </Route>
           <ProtectedRoute
             exact

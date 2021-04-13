@@ -80,15 +80,6 @@ class MainApi {
       .then((res) => res);
   }
 
-  // getSavedMovies() {
-  //   return fetch(`${this._baseUrl}/movies`, {
-  //     method: "GET",
-  //     headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem("jwt")}` },
-  //   })
-  //     .then(checkResponse)
-  //     .then((res) => res);
-  // }
-
   deleteSavedMovie(id) {
     return fetch(`${this._baseUrl}/movies/${id}`, {
       method: "DELETE",

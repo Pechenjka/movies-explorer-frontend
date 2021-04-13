@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import AboutMe from "../AboutMe/AboutMe";
 import AboutProject from "../AboutProject/AboutProject";
 import Footer from "../Footer/Footer";
@@ -8,14 +8,12 @@ import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 import "./Main.css";
 
-
-
 const Main = (props) => {
-const {loggedIn} = props
+  const { loggedIn } = props;
 
   return (
     <Fragment>
-      <Header loggedIn={loggedIn}/>
+      <Header loggedIn={loggedIn} />
       <main className="content">
         <Promo />
         <AboutProject />

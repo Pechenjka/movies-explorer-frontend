@@ -1,12 +1,10 @@
 import "./FilterCheckbox.css";
 
-const FilterCheckbox = ({setIsShortMovies, isShortMovies}) => {
-
+const FilterCheckbox = (props) => {
+  const { setIsShortMovies, isShortMovies } = props;
   const handleShortMovies = () => {
     setIsShortMovies(!isShortMovies)
   }
-
-
 
   return (
     <fieldset className="filterCheckbox">

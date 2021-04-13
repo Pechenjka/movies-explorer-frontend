@@ -57,7 +57,6 @@ const Movies = (props) => {
             handleLikeClick={handleLikeClick}
             isSavedMovie={isSavedMovie}
             isNotFoundSearch={isNotFoundSearch}
-
           />
         )}
         <button className={`movies__button ${hiddenButton}`} onClick={handleChangeAddMovies}>
