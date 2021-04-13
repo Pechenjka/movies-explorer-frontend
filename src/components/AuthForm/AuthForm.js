@@ -6,7 +6,7 @@ import { Fragment } from "react";
 const AuthForm = (props) => {
   const { title, buttonName, textLink, text, linkPath, values, onSubmit, onChange, errors, isValid, errorSubmit, setErrorSubmit, textError } = props;
   const { pathname } = useLocation();
-console.log(errors.password);
+
   return (
     <div className="authForm">
       <Link to="/">

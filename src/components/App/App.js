@@ -2,8 +2,6 @@ import { Route, Switch, useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import "./App.css";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -42,7 +40,6 @@ const App = () => {
       handleGetSavedMovies();
     }
   }, [loggedIn]);
-
 
   useEffect(() => {
     console.log("Все фильмы =>", movies);
@@ -271,6 +268,7 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       localStorage.removeItem("jwt");
+      setLoggedIn(false);
     }
   };
 
@@ -298,9 +296,9 @@ const App = () => {
       <div className="page">
         <Switch>
           <Route exact path="/">
-            <Header />
+            {/* <Header /> */}
             <Main loggedIn={loggedIn} />
-            <Footer />
+            {/* <Footer /> */}
           </Route>
           <ProtectedRoute
             exact
