@@ -23,6 +23,7 @@ const App = () => {
   const [initialShowMovie, setInitialShowMovie] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState([]);
+  const [initialisSavedMovie, setInitialisSavedMovie] = useState([]);
   const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
 
   const history = useHistory();
@@ -114,6 +115,7 @@ const App = () => {
       .then((res) => {
         if (res) {
           setIsSavedMovie(res);
+          setInitialisSavedMovie(res);
         }
       })
       .catch((err) => console.log(err));
@@ -276,6 +278,10 @@ const App = () => {
             isSavedMovie={isSavedMovie}
             handleLikeClick={handleLikeClick}
             isNotFoundSearch={isNotFoundSearch}
+            isShortMovies={isShortMovies}
+            setIsShortMovies={setIsShortMovies}
+            setIsSavedMovie={setIsSavedMovie}
+            initialisSavedMovie={initialisSavedMovie}
           />
           <ProtectedRoute
             exact
