@@ -20,6 +20,7 @@ const App = () => {
   const [errorSubmit, setErrorSubmit] = useState(false);
   const [movies, setMovies] = useState([]);
   const [showMovies, setShowMovies] = useState([]);
+  const [initialShowMovie, setInitialShowMovie] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState([]);
   const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
@@ -103,20 +104,10 @@ const App = () => {
       }
     };
     setShowMovies(handleShowMoviesWindowWidth);
+    setInitialShowMovie(handleShowMoviesWindowWidth);
   };
 
-  //Показывать дополнительные фильмы кликом по кнопке
-  const handleAddMovies = () => {
-    if (window.innerWidth >= 1280) {
-      const addMoviesMaxWidth = movies.slice(0, showMovies.length + 3);
-      return addMoviesMaxWidth;
-    }
-    if (window.innerWidth >= 320) {
-      const addMoviesMinWidth = movies.slice(0, showMovies.length + 2);
-      return addMoviesMinWidth;
-    }
-  };
-//Отображение сохраненных фильмов
+  //Отображение сохраненных фильмов
   const handleGetSavedMovies = () => {
     mainApi
       .getSavedMovies()
@@ -128,7 +119,7 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-//Функция сохранения и удаления фильмов
+  //Функция сохранения и удаления фильмов
   function handleLikeClick(data) {
     if (
       isSavedMovie &&
@@ -148,7 +139,7 @@ const App = () => {
             if (res) {
               const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data.movieId);
               setIsSavedMovie(isDeletedMovie);
-              setIsNotFoundSearch(false)
+              setIsNotFoundSearch(false);
             }
           })
           .catch((err) => console.log(err));
@@ -164,7 +155,7 @@ const App = () => {
         .catch((err) => console.log(err));
     }
   }
-//Регистрация пользователя
+  //Регистрация пользователя
   const handleRegister = (values) => {
     const { name, email, password } = values;
     mainApi
@@ -184,7 +175,7 @@ const App = () => {
         }
       });
   };
-//Авторизация пользователя
+  //Авторизация пользователя
   const handleLogin = (values) => {
     const { email, password } = values;
     mainApi
@@ -217,14 +208,14 @@ const App = () => {
       }
     });
   };
-//Получения данных текущего пользователя
+  //Получения данных текущего пользователя
   const handleGetUserInfo = () => {
     mainApi
       .getUserInfo()
       .then((res) => setCurrentUser(res))
       .catch(() => console.log("Пользователь не найден"));
   };
-//Фукнция выхода из аккаунта
+  //Фукнция выхода из аккаунта
   const handleSignOut = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -232,7 +223,7 @@ const App = () => {
       setLoggedIn(false);
     }
   };
-//Обновление данных пользователя
+  //Обновление данных пользователя
   const handleUpdateUser = (values) => {
     const { email, name } = values;
     mainApi
@@ -270,11 +261,11 @@ const App = () => {
             showMovies={showMovies}
             setIsShortMovies={setIsShortMovies}
             isShortMovies={isShortMovies}
-            handleAddMovies={handleAddMovies}
             setShowMovies={setShowMovies}
             handleLikeClick={handleLikeClick}
             isSavedMovie={isSavedMovie}
             isNotFoundSearch={isNotFoundSearch}
+            initialShowMovie={initialShowMovie}
           />
           <ProtectedRoute
             exact
