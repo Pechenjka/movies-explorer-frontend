@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import useFormWithValidation from "../../hooks/useForm";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -15,12 +15,12 @@ const Movies = (props) => {
     showMovies,
     setIsShortMovies,
     isShortMovies,
-    handleAddMovies,
     setShowMovies,
     movies,
     handleLikeClick,
     isSavedMovie,
     isNotFoundSearch,
+    initialShowMovie,
   } = props;
 
   const { values, handleChange, resetForm } = useFormWithValidation();
@@ -31,11 +31,41 @@ const Movies = (props) => {
     resetForm();
   };
 
+  //Показывать дополнительные фильмы кликом по кнопке
+  const handleAddMovies = () => {
+    if (window.innerWidth >= 1280) {
+      const addMoviesMaxWidth = movies.slice(0, showMovies.length + 3);
+      return addMoviesMaxWidth;
+    }
+    if (window.innerWidth >= 320) {
+      const addMoviesMinWidth = movies.slice(0, showMovies.length + 2);
+      return addMoviesMinWidth;
+    }
+  };
+
   const handleChangeAddMovies = () => {
     setShowMovies(handleAddMovies);
   };
 
-  const hiddenButton = showMovies.length <= 3 || showMovies.length === movies.length ? "movies__button_hidden" : "";
+  const shortFilms = showMovies.filter((item) => {
+    return item.duration <= 40;
+  });
+
+  //Эффект показывает короткометражные фильмы
+  useEffect(() => {
+    if (isShortMovies === false) {
+      setShowMovies(initialShowMovie);
+    }
+    if (isShortMovies === true && shortFilms) {
+      setShowMovies(shortFilms);
+    }
+    // eslint-disable-next-line
+  }, [isShortMovies, setShowMovies]);
+
+  const hiddenButton =
+    showMovies.length <= 3 || showMovies.length === movies.length || isShortMovies === true
+      ? "movies__button_hidden"
+      : "";
 
   return (
     <Fragment>

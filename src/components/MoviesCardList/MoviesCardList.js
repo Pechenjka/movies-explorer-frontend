@@ -2,7 +2,13 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
 const MoviesCardList = (props) => {
-  const { showMovies, isSaved, handleLikeClick, isSavedMovie, isNotFoundSearch } = props;
+  const {
+    showMovies,
+    isSaved,
+    handleLikeClick,
+    isSavedMovie,
+    isNotFoundSearch,
+  } = props;
 
   return (
     <section className="moviesCardList">
