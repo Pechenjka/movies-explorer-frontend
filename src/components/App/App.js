@@ -156,6 +156,7 @@ const App = () => {
             if (res) {
               const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data.movieId);
               setIsSavedMovie(isDeletedMovie);
+              setFilterMovies(isDeletedMovie)
               setIsNotFoundSearch(false);
             }
           })
