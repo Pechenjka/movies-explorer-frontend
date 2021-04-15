@@ -17,15 +17,16 @@ const SavedMovies = (props) => {
     isShortMovies,
     setIsSavedMovie,
     initialisSavedMovie,
+    filterMovies,
+    setFilterMovies,
   } = props;
   const [isSaved, setIsSaved] = useState(false);
 
-  const { values, handleChange, resetForm } = useFormWithValidation();
+  const { values, handleChange } = useFormWithValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSearchFilms(values.name);
-    resetForm();
   };
 
   useEffect(() => {
@@ -36,17 +37,22 @@ const SavedMovies = (props) => {
     return item.duration <= 40;
   });
 
+  useEffect(() => {
+    setFilterMovies(isSavedMovie);
+  }, []);
+
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
-    if (isShortMovies === false) {
-      setIsSavedMovie(initialisSavedMovie);
+    if (values.name !== "") {
+      onSearchFilms(values.name);
     }
-
-    if (isShortMovies === true && shortSavedFilms) {
-      setIsSavedMovie(shortSavedFilms);
+    if (isShortMovies) {
+      setFilterMovies(shortSavedFilms);
     }
-        // eslint-disable-next-line
-  }, [isShortMovies, setIsSavedMovie]);
+    if (!isShortMovies) {
+      setFilterMovies(isSavedMovie);
+    }
+  }, [isShortMovies]);
 
   return (
     <Fragment>
@@ -61,7 +67,7 @@ const SavedMovies = (props) => {
           isShortMovies={isShortMovies}
         />
         <MoviesCardList
-          showMovies={isSavedMovie}
+          showMovies={filterMovies}
           isSaved={isSaved}
           handleLikeClick={handleLikeClick}
           isSavedMovie={isSavedMovie}

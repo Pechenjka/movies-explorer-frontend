@@ -25,6 +25,7 @@ const App = () => {
   const [isSavedMovie, setIsSavedMovie] = useState([]);
   const [initialisSavedMovie, setInitialisSavedMovie] = useState([]);
   const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
+ const [filterMovies, setFilterMovies] =useState([])
 
   const history = useHistory();
 
@@ -79,14 +80,28 @@ const App = () => {
     const storageMovies = JSON.parse(localStorage.getItem("storageMovies"));
     const searchByWords = storageMovies.filter((item) => {
       if (isShortMovies) {
-        return item.duration <= 40 && item.year.toLowerCase().includes(word);
+        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
       }
-      return item.year.toLowerCase().includes(word);
+      return item.nameRU.toLowerCase().includes(word);
     });
     setMovies(searchByWords);
     handleSearchFilms(searchByWords);
     setIsNotFoundSearch(true);
   };
+
+    // Поиск фильмов по ключевым словам в локальном хранилище
+    const handleSearchByWordSaved = (word) => {
+
+      const searchByWords = isSavedMovie.filter((item) => {
+        if (isShortMovies) {
+          return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
+        }
+        return item.nameRU.toLowerCase().includes(word);
+      });
+      setFilterMovies(searchByWords);
+      handleSearchFilms(searchByWords);
+      setIsNotFoundSearch(true);
+    };
 
   //В зависимости от разрешения показывать разное кол-во фильмов
   const handleSearchFilms = (searchByWords) => {
@@ -157,6 +172,9 @@ const App = () => {
         .catch((err) => console.log(err));
     }
   }
+
+
+
   //Регистрация пользователя
   const handleRegister = (values) => {
     const { name, email, password } = values;
@@ -273,7 +291,7 @@ const App = () => {
             exact
             path="/saved-movies"
             component={SavedMovies}
-            onSearchFilms={handleSearchByWord}
+            onSearchFilms={handleSearchByWordSaved}
             loggedIn={loggedIn}
             isSavedMovie={isSavedMovie}
             handleLikeClick={handleLikeClick}
@@ -282,6 +300,8 @@ const App = () => {
             setIsShortMovies={setIsShortMovies}
             setIsSavedMovie={setIsSavedMovie}
             initialisSavedMovie={initialisSavedMovie}
+            setFilterMovies={setFilterMovies}
+            filterMovies={filterMovies}
           />
           <ProtectedRoute
             exact

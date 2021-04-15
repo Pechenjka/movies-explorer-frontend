@@ -23,12 +23,12 @@ const Movies = (props) => {
     initialShowMovie,
   } = props;
 
-  const { values, handleChange, resetForm } = useFormWithValidation();
+  const { values, handleChange } = useFormWithValidation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSearchFilms(values.name);
-    resetForm();
+
   };
 
   //Показывать дополнительные фильмы кликом по кнопке
