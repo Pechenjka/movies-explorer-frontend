@@ -23,9 +23,8 @@ const App = () => {
   const [initialShowMovie, setInitialShowMovie] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState([]);
-  const [initialisSavedMovie, setInitialisSavedMovie] = useState([]);
   const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
- const [filterMovies, setFilterMovies] =useState([])
+  const [filterMovies, setFilterMovies] = useState([]);
 
   const history = useHistory();
 
@@ -89,19 +88,18 @@ const App = () => {
     setIsNotFoundSearch(true);
   };
 
-    // Поиск фильмов по ключевым словам в локальном хранилище
-    const handleSearchByWordSaved = (word) => {
-
-      const searchByWords = isSavedMovie.filter((item) => {
-        if (isShortMovies) {
-          return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
-        }
-        return item.nameRU.toLowerCase().includes(word);
-      });
-      setFilterMovies(searchByWords);
-      handleSearchFilms(searchByWords);
-      setIsNotFoundSearch(true);
-    };
+  // Поиск фильмов по ключевым словам в локальном хранилище
+  const handleSearchByWordSaved = (word) => {
+    const searchByWords = isSavedMovie.filter((item) => {
+      if (isShortMovies) {
+        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
+      }
+      return item.nameRU.toLowerCase().includes(word);
+    });
+    setFilterMovies(searchByWords);
+    handleSearchFilms(searchByWords);
+    setIsNotFoundSearch(true);
+  };
 
   //В зависимости от разрешения показывать разное кол-во фильмов
   const handleSearchFilms = (searchByWords) => {
@@ -130,7 +128,6 @@ const App = () => {
       .then((res) => {
         if (res) {
           setIsSavedMovie(res);
-          setInitialisSavedMovie(res);
         }
       })
       .catch((err) => console.log(err));
@@ -156,7 +153,7 @@ const App = () => {
             if (res) {
               const isDeletedMovie = isSavedMovie.filter((item) => item.movieId !== data.movieId);
               setIsSavedMovie(isDeletedMovie);
-              setFilterMovies(isDeletedMovie)
+              setFilterMovies(isDeletedMovie);
               setIsNotFoundSearch(false);
             }
           })
@@ -173,8 +170,6 @@ const App = () => {
         .catch((err) => console.log(err));
     }
   }
-
-
 
   //Регистрация пользователя
   const handleRegister = (values) => {
@@ -299,8 +294,6 @@ const App = () => {
             isNotFoundSearch={isNotFoundSearch}
             isShortMovies={isShortMovies}
             setIsShortMovies={setIsShortMovies}
-            setIsSavedMovie={setIsSavedMovie}
-            initialisSavedMovie={initialisSavedMovie}
             setFilterMovies={setFilterMovies}
             filterMovies={filterMovies}
           />

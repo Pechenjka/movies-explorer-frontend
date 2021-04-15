@@ -15,8 +15,6 @@ const SavedMovies = (props) => {
     isNotFoundSearch,
     setIsShortMovies,
     isShortMovies,
-    setIsSavedMovie,
-    initialisSavedMovie,
     filterMovies,
     setFilterMovies,
   } = props;
@@ -39,9 +37,10 @@ const SavedMovies = (props) => {
 
   useEffect(() => {
     setFilterMovies(isSavedMovie);
+    // eslint-disable-next-line
   }, []);
 
-  //Эффект показывает короткометражные фильмы из показанных на странице после поиска
+  //Эффект показывает короткометражные фильмы
   useEffect(() => {
     if (values.name !== "") {
       onSearchFilms(values.name);
@@ -52,6 +51,7 @@ const SavedMovies = (props) => {
     if (!isShortMovies) {
       setFilterMovies(isSavedMovie);
     }
+    // eslint-disable-next-line
   }, [isShortMovies]);
 
   return (
