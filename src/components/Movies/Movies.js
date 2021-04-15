@@ -51,13 +51,16 @@ const Movies = (props) => {
     return item.duration <= 40;
   });
 
+
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
     if (isShortMovies === false) {
       setShowMovies(initialShowMovie);
+
     }
     if (isShortMovies === true && shortFilms) {
       setShowMovies(shortFilms);
+      onSearchFilms(values.name);
     }
     // eslint-disable-next-line
   }, [isShortMovies, setShowMovies]);

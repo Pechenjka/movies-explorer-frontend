@@ -41,7 +41,7 @@ const SavedMovies = (props) => {
     setFilterMovies(isSavedMovie);
   }, []);
 
-  //Эффект показывает короткометражные фильмы
+  //Эффект показывает короткометражные фильмы из показанных на странице после поиска
   useEffect(() => {
     if (values.name !== "") {
       onSearchFilms(values.name);
