@@ -31,15 +31,18 @@
   transition: 0.3s linear all;
 }
 
+.movies__button_hidden {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
   .movies {
     padding: 0 10px;
   }
-  
+
   .movies__button {
     width: 240px;
     height: 36px;
     margin-bottom: 9px;
-
   }
 }

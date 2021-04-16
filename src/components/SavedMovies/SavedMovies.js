@@ -1,27 +1,81 @@
 import "./SavedMovies.css";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import useFormWithValidation from "../../hooks/useForm";
 
 const SavedMovies = (props) => {
-  const { handleLoggidIn} = props;
+  const {
+    loggedIn,
+    isSavedMovie,
+    onSearchFilms,
+    handleLikeClick,
+    isNotFoundSearch,
+    setIsShortMovies,
+    isShortMovies,
+    filterMovies,
+    setFilterMovies,
+  } = props;
   const [isSaved, setIsSaved] = useState(false);
 
-  const savedCards = [{ id: "1" }, { id: "2" }, { id: "3" }];
+  const { values, handleChange } = useFormWithValidation();
 
-  useEffect(() => {
-    handleLoggidIn();
-  }, [handleLoggidIn]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearchFilms(values.name);
+  };
 
   useEffect(() => {
     setIsSaved(true);
   }, [setIsSaved]);
 
+  const shortSavedFilms = isSavedMovie.filter((item) => {
+    return item.duration <= 40;
+  });
+
+  useEffect(() => {
+    setFilterMovies(isSavedMovie);
+    // eslint-disable-next-line
+  }, []);
+
+  //Эффект показывает короткометражные фильмы
+  useEffect(() => {
+    if (values.name !== "") {
+      onSearchFilms(values.name);
+    }
+    if (isShortMovies) {
+      setFilterMovies(shortSavedFilms);
+    }
+    if (!isShortMovies) {
+      setFilterMovies(isSavedMovie);
+    }
+    // eslint-disable-next-line
+  }, [isShortMovies]);
+
   return (
-    <section className="savedMovies">
-      <SearchForm />
-      <MoviesCardList cards={savedCards} isSaved={isSaved} />
-    </section>
+    <Fragment>
+      <Header loggedIn={loggedIn} />
+      <section className="savedMovies">
+        <SearchForm
+          onSubmit={handleSubmit}
+          values={values}
+          handleChange={handleChange}
+          isSaved={isSaved}
+          setIsShortMovies={setIsShortMovies}
+          isShortMovies={isShortMovies}
+        />
+        <MoviesCardList
+          showMovies={filterMovies}
+          isSaved={isSaved}
+          handleLikeClick={handleLikeClick}
+          isSavedMovie={isSavedMovie}
+          isNotFoundSearch={isNotFoundSearch}
+        />
+      </section>
+      <Footer />
+    </Fragment>
   );
 };
 
