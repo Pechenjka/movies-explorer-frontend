@@ -17,7 +17,7 @@ const Navigation = (props) => {
   const AuthNavigation = [
     { name: "Фильмы", path: "/movies", id: "1" },
     { name: "Сохраненные фильмы", path: "/saved-movies", id: "2" },
-    { name: "Аккаунт", path: "/profile", className: "navigation__link-account_logo", id: "3"},
+    { name: "Аккаунт", path: "/profile", className: "navigation__link-account_logo", id: "3" },
   ];
 
   const classesLinkContainer = `navigation__link-container ${

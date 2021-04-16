@@ -18,7 +18,11 @@
   height: 271px;
   background-color: white;
 }
-
+.notFound_search{
+  color: white;
+  width: 100%;
+  text-align: center;
+}
 @media screen and (max-width: 1277px) {
   .moviesCardList__container {
     grid-template-columns: repeat(2, 339px);

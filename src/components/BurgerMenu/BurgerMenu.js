@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import "./BurgerMenu.css";
 
-const BurgerMenu = ({ isBurgerMenu, setIsBurgerMenu }) => {
+const BurgerMenu = (props) => {
+  const { isBurgerMenu, setIsBurgerMenu } = props;
   const BurgerMenuLinks = [
     { name: "Главная", path: "/", id: "1" },
     { name: "Фильмы", path: "/movies", id: "2" },
