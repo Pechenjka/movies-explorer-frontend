@@ -1,4 +1,4 @@
-import { Route, Switch, useHistory } from "react-router";
+import { Route, Switch, useHistory, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import "./App.css";
 import CurrentUserContext from "../../context/CurrentUserContext";
@@ -20,13 +20,13 @@ const App = () => {
   const [errorSubmit, setErrorSubmit] = useState(false);
   const [movies, setMovies] = useState([]);
   const [showMovies, setShowMovies] = useState([]);
-  const [initialShowMovie, setInitialShowMovie] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isSavedMovie, setIsSavedMovie] = useState([]);
   const [isNotFoundSearch, setIsNotFoundSearch] = useState(false);
   const [filterMovies, setFilterMovies] = useState([]);
 
   const history = useHistory();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
@@ -118,7 +118,6 @@ const App = () => {
       }
     };
     setShowMovies(handleShowMoviesWindowWidth);
-    setInitialShowMovie(handleShowMoviesWindowWidth);
   };
 
   //Отображение сохраненных фильмов
@@ -220,7 +219,10 @@ const App = () => {
       if (res) {
         handleGetUserInfo();
         setLoggedIn(true);
-        history.push("/movies");
+        if (pathname === "/signup" || pathname === "/signin") {
+          return history.push("/");
+        }
+        history.push(`${pathname}`);
       }
     });
   };
@@ -281,7 +283,6 @@ const App = () => {
             handleLikeClick={handleLikeClick}
             isSavedMovie={isSavedMovie}
             isNotFoundSearch={isNotFoundSearch}
-            initialShowMovie={initialShowMovie}
           />
           <ProtectedRoute
             exact

@@ -22,18 +22,9 @@ const SavedMovies = (props) => {
 
   const { values, handleChange } = useFormWithValidation();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearchFilms(values.name);
-  };
-
   useEffect(() => {
     setIsSaved(true);
   }, [setIsSaved]);
-
-  const shortSavedFilms = isSavedMovie.filter((item) => {
-    return item.duration <= 40;
-  });
 
   useEffect(() => {
     setFilterMovies(isSavedMovie);
@@ -46,13 +37,19 @@ const SavedMovies = (props) => {
       onSearchFilms(values.name);
     }
     if (isShortMovies) {
-      setFilterMovies(shortSavedFilms);
+      onSearchFilms(values.name);
     }
     if (!isShortMovies) {
       setFilterMovies(isSavedMovie);
     }
     // eslint-disable-next-line
   }, [isShortMovies]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearchFilms(values.name);
+  };
+
 
   return (
     <Fragment>

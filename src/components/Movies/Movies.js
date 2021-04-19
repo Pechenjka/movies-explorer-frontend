@@ -20,15 +20,24 @@ const Movies = (props) => {
     handleLikeClick,
     isSavedMovie,
     isNotFoundSearch,
-    initialShowMovie,
   } = props;
 
   const { values, handleChange } = useFormWithValidation();
 
+  //Эффект показывает короткометражные фильмы
+  useEffect(() => {
+    if (isShortMovies === false) {
+      onSearchFilms(values.name);
+    }
+    if (isShortMovies === true) {
+      onSearchFilms(values.name);
+    }
+    // eslint-disable-next-line
+  }, [isShortMovies]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onSearchFilms(values.name);
-
   };
 
   //Показывать дополнительные фильмы кликом по кнопке
@@ -46,24 +55,6 @@ const Movies = (props) => {
   const handleChangeAddMovies = () => {
     setShowMovies(handleAddMovies);
   };
-
-  const shortFilms = showMovies.filter((item) => {
-    return item.duration <= 40;
-  });
-
-
-  //Эффект показывает короткометражные фильмы
-  useEffect(() => {
-    if (isShortMovies === false) {
-      setShowMovies(initialShowMovie);
-
-    }
-    if (isShortMovies === true && shortFilms) {
-      setShowMovies(shortFilms);
-      onSearchFilms(values.name);
-    }
-    // eslint-disable-next-line
-  }, [isShortMovies, setShowMovies]);
 
   const hiddenButton =
     showMovies.length <= 3 || showMovies.length === movies.length || isShortMovies === true
