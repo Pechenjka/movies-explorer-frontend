@@ -91,7 +91,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://api.movies.lobachev.students.nomoredomains.icu",
+  baseUrl: "https://api.movies.lobachev.students.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
   },
