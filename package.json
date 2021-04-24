@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "deploy": "npm run build && scp -r ./build/* mesto-praktikum@130.193.54.103:/home/mesto-praktikum/movies-explorer-frontend",
+    "deploy": "npm run build && scp -r ./build/* mesto-praktikum@84.252.138.163:/home/mesto-praktikum/movies-explorer-frontend",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
