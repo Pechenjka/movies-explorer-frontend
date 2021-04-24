@@ -88,7 +88,7 @@ const App = () => {
     setIsNotFoundSearch(true);
   };
 
-  // Поиск фильмов по ключевым словам в локальном хранилище
+  // Поиск фильмов по ключевым словам в сохраненных фильмов
   const handleSearchByWordSaved = (word) => {
     const searchByWords = isSavedMovie.filter((item) => {
       if (isShortMovies) {
