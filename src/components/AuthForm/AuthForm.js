@@ -41,6 +41,7 @@ const AuthForm = (props) => {
                 maxLength="30"
                 required
                 onChange={onChange}
+                pattern="[a-zA-Zа-яА-ЯЁё\s\-]*"
                 value={values.name || ""}
               />
               <span className="form__span" id="text-error">
