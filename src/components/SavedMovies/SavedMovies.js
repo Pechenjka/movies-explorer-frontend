@@ -49,7 +49,6 @@ const SavedMovies = (props) => {
     onSearchFilms(values.name);
   };
 
-
   return (
     <Fragment>
       <Header loggedIn={loggedIn} />
