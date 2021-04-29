@@ -28,22 +28,21 @@ const SavedMovies = (props) => {
 
   useEffect(() => {
     setFilterMovies(isSavedMovie);
-    // eslint-disable-next-line
-  }, []);
+  }, [setFilterMovies, isSavedMovie]);
 
   //Эффект показывает короткометражные фильмы
-  // useEffect(() => {
-  //   if (values.name !== "") {
-  //     onSearchFilms(values.name);
-  //   }
-  //   if (isShortMovies) {
-  //     onSearchFilms(values.name);
-  //   }
-  //   if (!isShortMovies) {
-  //     setFilterMovies(isSavedMovie);
-  //   }
-  //   // eslint-disable-next-line
-  // }, [isShortMovies]);
+  useEffect(() => {
+    if (values.name !== "") {
+      onSearchFilms(values.name);
+    }
+    if (isShortMovies) {
+      onSearchFilms(values.name);
+    }
+    if (!isShortMovies) {
+      setFilterMovies(isSavedMovie);
+    }
+    // eslint-disable-next-line
+  }, [isShortMovies]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
