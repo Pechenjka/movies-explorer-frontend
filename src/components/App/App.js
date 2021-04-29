@@ -44,35 +44,37 @@ const App = () => {
   }, [loggedIn]);
 
   //Сохранение массива фильмов из внешнего API в локальное хранилище
-  const getMovies = () => {
-    setIsLoading(true);
-    moviesApi
-      .searchFilms()
-      .then((res) => {
-        return res.map((item) => {
-          return {
-            country: item.country || "",
-            director: item.director || "",
-            duration: item.duration || "",
-            year: item.year || "",
-            description: item.description || "",
-            image: !item.image ? "" : `https://api.nomoreparties.co${item.image.url}`,
-            trailer: item.trailerLink,
-            thumbnail: !item.image ? "" : `https://api.nomoreparties.co${item.image.formats.thumbnail.url}`,
-            movieId: item.id || "",
-            nameRU: item.nameRU || "",
-            nameEN: item.nameEN || "",
-          };
-        });
-      })
-      .then((res) => {
-        if (res) {
+  function getMovies() {
+    if (!localStorage.getItem("storageMovies")) {
+      setIsLoading(true);
+      return moviesApi
+        .searchFilms()
+        .then((res) => {
+          return res.map((item) => {
+            return {
+              country: item.country || "",
+              director: item.director || "",
+              duration: item.duration || "",
+              year: item.year || "",
+              description: item.description || "",
+              image: !item.image ? "" : `https://api.nomoreparties.co${item.image.url}`,
+              trailer: item.trailerLink,
+              thumbnail: !item.image ? "" : `https://api.nomoreparties.co${item.image.formats.thumbnail.url}`,
+              movieId: item.id || "",
+              nameRU: item.nameRU || "",
+              nameEN: item.nameEN || "",
+            };
+          });
+        })
+        .then((res) => {
+          // if (res) {
           localStorage.setItem("storageMovies", JSON.stringify(res));
-        }
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  };
+          // }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
+  }
 
   // Поиск фильмов по ключевым словам в локальном хранилище
   const handleSearchByWord = (word) => {
@@ -171,7 +173,7 @@ const App = () => {
   }
 
   //Регистрация пользователя
-  const handleRegister = (values) => {
+  function handleRegister(values) {
     const { name, email, password } = values;
     mainApi
       .register(name, email, password)
@@ -181,6 +183,7 @@ const App = () => {
         }
         if (res) {
           handleLogin(values);
+          getMovies();
         }
       })
       .catch((err) => {
@@ -189,9 +192,9 @@ const App = () => {
           console.log({ message: "Некорректно заполнено одно из полей" });
         }
       });
-  };
+  }
   //Авторизация пользователя
-  const handleLogin = (values) => {
+  function handleLogin(values) {
     const { email, password } = values;
     mainApi
       .authorization(email, password)
@@ -212,7 +215,7 @@ const App = () => {
           console.log({ message: "Необходимо пройти регистрацию" });
         }
       });
-  };
+  }
 
   const tokenCheck = () => {
     mainApi.getContent().then((res) => {
@@ -238,6 +241,7 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       localStorage.removeItem("jwt");
+      localStorage.removeItem("storageMovies");
       setLoggedIn(false);
     }
   };
@@ -283,6 +287,7 @@ const App = () => {
             handleLikeClick={handleLikeClick}
             isSavedMovie={isSavedMovie}
             isNotFoundSearch={isNotFoundSearch}
+            setIsNotFoundSearch={setIsNotFoundSearch}
           />
           <ProtectedRoute
             exact
