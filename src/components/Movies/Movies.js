@@ -20,6 +20,7 @@ const Movies = (props) => {
     handleLikeClick,
     isSavedMovie,
     isNotFoundSearch,
+    setIsNotFoundSearch,
   } = props;
 
   const { values, handleChange } = useFormWithValidation();
@@ -27,13 +28,14 @@ const Movies = (props) => {
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
     if (isShortMovies === false) {
-      onSearchFilms(values.name);
+      setIsNotFoundSearch(false);
+      setShowMovies([]);
     }
     if (isShortMovies === true) {
       onSearchFilms(values.name);
     }
     // eslint-disable-next-line
-  }, [isShortMovies]);
+  }, [isShortMovies, values]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,10 +58,7 @@ const Movies = (props) => {
     setShowMovies(handleAddMovies);
   };
 
-  const hiddenButton =
-    showMovies.length <= 3 || showMovies.length === movies.length || isShortMovies === true
-      ? "movies__button_hidden"
-      : "";
+  const hiddenButton = showMovies.length <= 3 || showMovies.length === movies.length ? "movies__button_hidden" : "";
 
   return (
     <Fragment>

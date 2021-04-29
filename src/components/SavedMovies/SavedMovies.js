@@ -28,8 +28,7 @@ const SavedMovies = (props) => {
 
   useEffect(() => {
     setFilterMovies(isSavedMovie);
-    // eslint-disable-next-line
-  }, []);
+  }, [setFilterMovies, isSavedMovie]);
 
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
