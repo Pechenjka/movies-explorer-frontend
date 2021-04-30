@@ -23,7 +23,9 @@ const SavedMovies = (props) => {
   const { values, handleChange } = useFormWithValidation();
 
   useEffect(() => {
+    setIsShortMovies(false);
     setIsSaved(true);
+    // eslint-disable-next-line
   }, [setIsSaved]);
 
   useEffect(() => {
@@ -35,14 +37,14 @@ const SavedMovies = (props) => {
     if (values.name !== "") {
       onSearchFilms(values.name);
     }
-    if (isShortMovies) {
+    if (isShortMovies === true) {
       onSearchFilms(values.name);
     }
-    if (!isShortMovies) {
+    if (isShortMovies === false) {
       setFilterMovies(isSavedMovie);
     }
     // eslint-disable-next-line
-  }, [isShortMovies]);
+  }, [isShortMovies, values]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

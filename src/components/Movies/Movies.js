@@ -25,6 +25,11 @@ const Movies = (props) => {
 
   const { values, handleChange } = useFormWithValidation();
 
+  useEffect(() => {
+    setIsShortMovies(false);
+    // eslint-disable-next-line
+  }, []);
+
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
     if (isShortMovies === false) {

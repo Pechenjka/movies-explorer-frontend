@@ -44,7 +44,7 @@ const App = () => {
   }, [loggedIn]);
 
   //Сохранение массива фильмов из внешнего API в локальное хранилище
-  function getMovies() {
+  const getMovies = () => {
     if (!localStorage.getItem("storageMovies")) {
       setIsLoading(true);
       return moviesApi
@@ -135,7 +135,7 @@ const App = () => {
   };
 
   //Функция сохранения и удаления фильмов
-  function handleLikeClick(data) {
+  const handleLikeClick = (data) => {
     if (
       isSavedMovie &&
       isSavedMovie.find((item) => {
@@ -173,7 +173,7 @@ const App = () => {
   }
 
   //Регистрация пользователя
-  function handleRegister(values) {
+  const handleRegister = (values) => {
     const { name, email, password } = values;
     mainApi
       .register(name, email, password)
@@ -194,7 +194,7 @@ const App = () => {
       });
   }
   //Авторизация пользователя
-  function handleLogin(values) {
+  const handleLogin = (values) => {
     const { email, password } = values;
     mainApi
       .authorization(email, password)
