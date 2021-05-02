@@ -83,9 +83,7 @@ const App = () => {
       if (isShortMovies) {
         return item.duration <= 40 && item.nameRU.toLowerCase().includes(word.toLowerCase());
       }
-      if (!isShortMovies) {
-        return item.nameRU.toLowerCase().includes(word.toLowerCase());
-      }
+      return item.nameRU.toLowerCase().includes(word.toLowerCase());
     });
     setMovies(searchByWords);
     handleSearchFilms(searchByWords);
