@@ -74,16 +74,18 @@ const App = () => {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
     }
-  }
+  };
 
   // Поиск фильмов по ключевым словам в локальном хранилище
   const handleSearchByWord = (word) => {
     const storageMovies = JSON.parse(localStorage.getItem("storageMovies"));
     const searchByWords = storageMovies.filter((item) => {
       if (isShortMovies) {
-        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
+        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word.toLowerCase());
       }
-      return item.nameRU.toLowerCase().includes(word);
+      if (!isShortMovies) {
+        return item.nameRU.toLowerCase().includes(word.toLowerCase());
+      }
     });
     setMovies(searchByWords);
     handleSearchFilms(searchByWords);
@@ -94,9 +96,9 @@ const App = () => {
   const handleSearchByWordSaved = (word) => {
     const searchByWords = isSavedMovie.filter((item) => {
       if (isShortMovies) {
-        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word);
+        return item.duration <= 40 && item.nameRU.toLowerCase().includes(word.toLowerCase());
       }
-      return item.nameRU.toLowerCase().includes(word);
+      return item.nameRU.toLowerCase().includes(word.toLowerCase());
     });
     setFilterMovies(searchByWords);
     handleSearchFilms(searchByWords);
@@ -170,7 +172,7 @@ const App = () => {
         })
         .catch((err) => console.log(err));
     }
-  }
+  };
 
   //Регистрация пользователя
   const handleRegister = (values) => {
@@ -192,7 +194,7 @@ const App = () => {
           console.log({ message: "Некорректно заполнено одно из полей" });
         }
       });
-  }
+  };
   //Авторизация пользователя
   const handleLogin = (values) => {
     const { email, password } = values;
@@ -215,7 +217,7 @@ const App = () => {
           console.log({ message: "Необходимо пройти регистрацию" });
         }
       });
-  }
+  };
 
   const tokenCheck = () => {
     mainApi.getContent().then((res) => {

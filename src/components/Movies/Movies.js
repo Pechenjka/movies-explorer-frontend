@@ -28,19 +28,21 @@ const Movies = (props) => {
   useEffect(() => {
     setIsShortMovies(false);
     // eslint-disable-next-line
-  }, []);
+  }, [setIsShortMovies]);
 
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
     if (isShortMovies === false) {
       setIsNotFoundSearch(false);
       setShowMovies([]);
-    }
-    if (isShortMovies === true) {
+    } else if (isShortMovies === true && values.name === "") {
+      setIsNotFoundSearch(true);
+      setShowMovies([]);
+    } else if (isShortMovies === true && values.name) {
       onSearchFilms(values.name);
     }
     // eslint-disable-next-line
-  }, [isShortMovies, values]);
+  }, [isShortMovies, values, setIsNotFoundSearch, setShowMovies]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

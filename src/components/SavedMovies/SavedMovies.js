@@ -1,5 +1,5 @@
 import "./SavedMovies.css";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Header from "../Header/Header";
@@ -22,29 +22,22 @@ const SavedMovies = (props) => {
 
   const { values, handleChange } = useFormWithValidation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsShortMovies(false);
     setIsSaved(true);
     // eslint-disable-next-line
-  }, [setIsSaved]);
-
-  useEffect(() => {
-    setFilterMovies(isSavedMovie);
-  }, [setFilterMovies, isSavedMovie]);
+  }, []);
 
   //Эффект показывает короткометражные фильмы
   useEffect(() => {
-    if (values.name !== "") {
-      onSearchFilms(values.name);
-    }
-    if (isShortMovies === true) {
-      onSearchFilms(values.name);
-    }
-    if (isShortMovies === false) {
+    if (isShortMovies === false || onSearchFilms("")) {
       setFilterMovies(isSavedMovie);
     }
+    else if (isShortMovies === true && values.name) {
+      onSearchFilms(values.name);
+    }
     // eslint-disable-next-line
-  }, [isShortMovies, values]);
+  }, [isShortMovies, isSavedMovie, values]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
